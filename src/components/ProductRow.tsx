@@ -1,4 +1,4 @@
-import { sql } from '@/lib/db';
+import sql from '@/lib/db';
 import ProductCard from './ProductCard';
 
 interface Product {
@@ -13,7 +13,11 @@ interface ProductRowProps {
   gridClass: string; // CSS class to control grid layout
 }
 
-export default async function ProductRow({ rowId, sectionTitle, gridClass }: ProductRowProps) {
+export default async function ProductRow({
+  rowId,
+  sectionTitle,
+  gridClass,
+}: ProductRowProps) {
   let products: Product[] = [];
 
   try {
@@ -25,12 +29,15 @@ export default async function ProductRow({ rowId, sectionTitle, gridClass }: Pro
       ORDER BY id ASC
     `;
   } catch (error) {
-    console.error(`Database query failure for row allocation [${rowId}]:`, error);
+    console.error(
+      `Database query failure for row allocation [${rowId}]:`,
+      error,
+    );
   }
 
   return (
     <section className={`product-section ${rowId}-section`}>
-      <h2 className="section-title">{sectionTitle}</h2>
+      <h2 className='section-title'>{sectionTitle}</h2>
       <div className={`product-grid ${gridClass}`}>
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
