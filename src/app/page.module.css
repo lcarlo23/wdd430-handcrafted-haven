@@ -15,11 +15,10 @@
   gap: 2.5rem;
   max-width: 800px;
   text-align: center;
-  /* Creiamo un blocco bianco per far risaltare il contenuto dallo sfondo crema */
   background-color: #ffffff;
   padding: 3rem 2rem;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(40, 54, 24, 0.08); /* Ombra leggera verde muschio */
+  box-shadow: 0 10px 30px rgba(40, 54, 24, 0.08);
 }
 
 .logo {
@@ -55,7 +54,7 @@
   color: var(--color-gold);
 }
 
-/* Container per i pulsanti (Deploy Now, Documentation) */
+/* Buttons containers */
 .ctas {
   display: flex;
   gap: 1rem;
@@ -64,7 +63,7 @@
   margin-top: 1.5rem;
 }
 
-/* Stili comuni per i bottoni */
+/* Common styles for buttons */
 .primary,
 .secondary {
   display: flex;
@@ -79,7 +78,7 @@
   cursor: pointer;
 }
 
-/* Bottone Principale */
+/* Primary Button */
 .primary {
   background-color: var(--color-olive);
   color: var(--color-cream);
@@ -93,7 +92,7 @@
   transform: translateY(-2px);
 }
 
-/* Bottone Secondario */
+/* Secondary Button */
 .secondary {
   background-color: transparent;
   color: var(--color-moss);
@@ -106,7 +105,7 @@
   transform: translateY(-2px);
 }
 
-/* Responsive Design per schermi piccoli */
+/* Responsive Design for small screens */
 @media (max-width: 600px) {
   .ctas {
     flex-direction: column;
