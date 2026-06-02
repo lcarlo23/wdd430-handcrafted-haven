@@ -1,142 +1,128 @@
 .page {
-  --background: #fafafa;
-  --foreground: #fff;
-
-  --text-primary: #000;
-  --text-secondary: #666;
-
-  --button-primary-hover: #383838;
-  --button-secondary-hover: #f2f2f2;
-  --button-secondary-border: #ebebeb;
-
   display: flex;
-  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-geist-sans);
-  background-color: var(--background);
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: var(--font-body);
 }
 
 .main {
   display: flex;
-  flex: 1;
-  width: 100%;
-  max-width: 800px;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  background-color: var(--foreground);
-  padding: 120px 60px;
+  align-items: center;
+  gap: 2.5rem;
+  max-width: 800px;
+  text-align: center;
+  /* Creiamo un blocco bianco per far risaltare il contenuto dallo sfondo crema */
+  background-color: #ffffff;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(40, 54, 24, 0.08); /* Ombra leggera verde muschio */
+}
+
+.logo {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
 }
 
 .intro {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 24px;
+  gap: 1rem;
 }
 
 .intro h1 {
-  max-width: 320px;
-  font-size: 40px;
-  font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -2.4px;
-  text-wrap: balance;
-  color: var(--text-primary);
+  font-size: 2.8rem;
+  color: var(--color-moss);
+  margin-bottom: 0.5rem;
 }
 
 .intro p {
-  max-width: 440px;
-  font-size: 18px;
-  line-height: 32px;
-  text-wrap: balance;
-  color: var(--text-secondary);
+  font-size: 1.1rem;
+  color: #4a4a4a;
 }
 
 .intro a {
-  font-weight: 500;
-  color: var(--text-primary);
+  font-weight: bold;
+  text-decoration: underline;
+  color: var(--color-copper);
 }
 
+.intro a:hover {
+  color: var(--color-gold);
+}
+
+/* Container per i pulsanti (Deploy Now, Documentation) */
 .ctas {
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  max-width: 440px;
-  gap: 16px;
-  font-size: 14px;
-}
-
-.ctas a {
-  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
   justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* Stili comuni per i bottoni */
+.primary,
+.secondary {
+  display: flex;
   align-items: center;
-  height: 40px;
-  padding: 0 16px;
-  border-radius: 128px;
-  border: 1px solid transparent;
-  transition: 0.2s;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
   cursor: pointer;
-  width: fit-content;
-  font-weight: 500;
 }
 
-a.primary {
-  background: var(--text-primary);
-  color: var(--background);
-  gap: 8px;
+/* Bottone Principale */
+.primary {
+  background-color: var(--color-olive);
+  color: var(--color-cream);
+  border: 2px solid var(--color-olive);
 }
 
-a.secondary {
-  border-color: var(--button-secondary-border);
+.primary:hover {
+  background-color: var(--color-moss);
+  border-color: var(--color-moss);
+  color: var(--color-cream);
+  transform: translateY(-2px);
 }
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
+/* Bottone Secondario */
+.secondary {
+  background-color: transparent;
+  color: var(--color-moss);
+  border: 2px solid var(--color-moss);
 }
 
+.secondary:hover {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design per schermi piccoli */
 @media (max-width: 600px) {
-  .main {
-    padding: 48px 24px;
+  .ctas {
+    flex-direction: column;
+    width: 100%;
   }
 
-  .intro {
-    gap: 16px;
+  .primary,
+  .secondary {
+    width: 100%;
+  }
+
+  .main {
+    padding: 2rem 1.5rem;
   }
 
   .intro h1 {
-    font-size: 32px;
-    line-height: 40px;
-    letter-spacing: -1.92px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-
-  .page {
-    --background: #000;
-    --foreground: #000;
-
-    --text-primary: #ededed;
-    --text-secondary: #999;
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-    --button-secondary-border: #1a1a1a;
+    font-size: 2.2rem;
   }
 }
