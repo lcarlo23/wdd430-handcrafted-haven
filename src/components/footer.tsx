@@ -7,7 +7,6 @@ export default function Footer() {
       <div className="footer-navlinks-container">
         <NavLinks />
       </div>
-      {/* <br></br> */}
       <p className="footer-copyright-text">&copy; {current_year}, Team01-WDD430 (Block 3, 2026)  </p>
     </div>
   );
