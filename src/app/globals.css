@@ -1,34 +1,17 @@
+/* =========================================
+   GLOBAL VARIABLES AND FONTS
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --color-olive: #606c38;
+  --color-moss: #283618;
+  --color-cream: #fefae0;
+  --color-gold: #dda15e;
+  --color-copper: #bc6c25;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-heading: 'Libre Baskerville', serif;
+  --font-body: 'Open Sans', sans-serif;
 }
 
 * {
@@ -37,13 +20,261 @@ body {
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--color-cream);
+  color: var(--color-moss);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* Text Styles */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.section-title {
+  font-family: var(--font-heading);
+  color: var(--color-moss);
+}
+
+a {
+  color: var(--color-olive);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-copper);
+}
+
+/* =========================================
+   COMPONENTS
+   ========================================= */
+
+/* --- Navbar & NavLinks --- */
+.navbar {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 15px rgba(40, 54, 24, 0.05);
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-moss);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-link:hover {
+  color: var(--color-copper);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
   }
+}
+
+/* --- Product Row & Grid --- */
+.product-section {
+  margin: 4rem 0;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Product Card --- */
+.product-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(40, 54, 24, 0.08);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(40, 54, 24, 0.15);
+}
+
+.image-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-color: #e2e8f0;
+}
+
+.product-details {
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-name {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.product-price {
+  font-weight: bold;
+  color: var(--color-copper);
+  font-size: 1.2rem;
+  margin: 0;
+  font-family: var(--font-body);
+}
+
+/* --- Featured Handcrafter --- */
+.featured-section {
+  margin: 5rem auto;
+  max-width: 1200px;
+  background-color: rgba(221, 161, 94, 0.1);
+  padding: 3rem;
+  border-radius: 12px;
+}
+
+.handcrafter-card {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+}
+
+.handcrafter-image-box {
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.handcrafter-image-box img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.handcrafter-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.handcrafter-info h3 {
+  font-size: 1.8rem;
+  color: var(--color-moss);
+  margin: 0;
+  font-family: var(--font-heading);
+}
+
+.handcrafter-info p {
+  color: #4a4a4a;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+  .handcrafter-card {
+    flex-direction: column;
+  }
+  .featured-section {
+    padding: 2rem 1rem;
+    margin: 2rem 1rem;
+  }
+}
+
+/* --- Footer --- */
+.footer {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  padding: 3rem 2rem 1.5rem;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer .nav-link {
+  color: var(--color-cream);
+}
+
+.footer .nav-link:hover {
+  color: var(--color-gold);
+}
+
+.footer-navlinks-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.footer-copyright-text {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  text-align: center;
+  margin: 0;
+  border-top: 1px solid rgba(254, 250, 224, 0.2);
+  padding-top: 1.5rem;
+  width: 100%;
+  max-width: 800px;
 }
