@@ -116,28 +116,13 @@ a:hover {
   text-align: center;
 }
 
-.product-grid,
-.main-product-grid {
+.product-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 15rem));
   gap: 2rem;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
-}
-
-@media (max-width: 1024px) {
-  .product-grid,
-  .main-product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .product-grid,
-  .main-product-grid {
-    grid-template-columns: 1fr;
-  }
+  justify-content: center;
 }
 
 /* --- Product Card --- */
@@ -151,6 +136,9 @@ a:hover {
     box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  flex: 1;
+  min-width: 10rem;
 }
 
 .product-card:hover {
@@ -160,7 +148,7 @@ a:hover {
 
 .image-placeholder {
   width: 100%;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 1;
   background-color: #e2e8f0;
 }
 
@@ -169,6 +157,8 @@ a:hover {
   text-align: center;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 

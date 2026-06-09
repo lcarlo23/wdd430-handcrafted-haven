@@ -62,7 +62,7 @@ export default function ProductList({
 
   return (
     <div className="product-list-container">
-      <div className="main-product-grid">
+      <div className="product-grid">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
