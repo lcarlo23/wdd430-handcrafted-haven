@@ -116,7 +116,8 @@ a:hover {
   text-align: center;
 }
 
-.product-grid {
+.product-grid,
+.main-product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
@@ -126,13 +127,15 @@ a:hover {
 }
 
 @media (max-width: 1024px) {
-  .product-grid {
+  .product-grid,
+  .main-product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  .product-grid {
+  .product-grid,
+  .main-product-grid {
     grid-template-columns: 1fr;
   }
 }
@@ -239,6 +242,155 @@ a:hover {
     padding: 2rem 1rem;
     margin: 2rem 1rem;
   }
+}
+
+/* =========================================
+   CATALOG & FILTERS (ProductGrid & ProductFilters)
+   ========================================= */
+
+.catalog-section {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.catalog-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(40, 54, 24, 0.15);
+  padding-bottom: 1.5rem;
+}
+
+/* --- Filters Bar --- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(40, 54, 24, 0.05);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  color: var(--color-moss);
+  font-weight: 600;
+}
+
+.filter-group select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-moss);
+  background-color: #f8f9fa;
+  cursor: pointer;
+  outline: none;
+}
+
+.filter-group select:focus {
+  border-color: var(--color-olive);
+}
+
+.checkbox-group label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+/* --- Filters buttons --- */
+.filter-actions {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+}
+
+.btn-apply {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-apply:hover {
+  background-color: var(--color-olive);
+}
+
+.btn-reset {
+  background-color: transparent;
+  color: var(--color-moss);
+  border: 1px solid #ccc;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.btn-reset:hover {
+  background-color: #e2e8f0;
+}
+
+/* =========================================
+   MAIN PRODUCT GRID & LOAD MORE (ProductList)
+   ========================================= */
+
+.no-results {
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  color: var(--color-moss);
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(40, 54, 24, 0.05);
+}
+
+.load-more-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.btn-load-more {
+  background-color: transparent;
+  color: var(--color-moss);
+  border: 2px solid var(--color-moss);
+  padding: 0.75rem 2.5rem;
+  font-size: 1.1rem;
+  font-family: var(--font-body);
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-load-more:hover:not(:disabled) {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+}
+
+.btn-load-more:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #999;
+  color: #999;
 }
 
 /* --- Footer --- */
