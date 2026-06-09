@@ -24,7 +24,7 @@ const StarRating: React.FC<StarRatingProps> = ({
         {stars.map((type, index) => (
           <span key={index} style={{ fontSize: size, color }}>
             {type === "full" && "★"}
-            {type === "half" && "☆"}
+            {type === "half" && "⯪"}
             {type === "empty" && "☆"}
           </span>
         ))}
