@@ -1,0 +1,210 @@
+/* =========================================
+   SELLER DASHBOARD
+   ========================================= */
+
+.dashboard-container {
+  max-width: 1000px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.dashboard-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--color-moss);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.dashboard-error {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.2rem;
+  color: #d9534f;
+  background-color: #fdf2f2;
+  border-radius: 8px;
+  margin: 4rem auto;
+  max-width: 600px;
+}
+
+/* --- DASHBOARD SECTIONS --- */
+.dashboard-section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2.5rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 20px rgba(40, 54, 24, 0.08);
+}
+
+.dashboard-section h2 {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: var(--color-moss);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(40, 54, 24, 0.1);
+}
+
+/* --- FORM STYLES --- */
+.dashboard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-moss);
+  font-size: 0.95rem;
+}
+
+.form-group input[type='text'],
+.form-group input[type='number'],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--color-olive);
+  box-shadow: 0 0 0 3px rgba(96, 108, 56, 0.15);
+  background-color: #ffffff;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-checkbox-group {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.form-checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: normal;
+  cursor: pointer;
+  color: var(--color-moss);
+}
+
+.form-checkbox-group input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--color-moss);
+}
+
+/* --- BOTTONI --- */
+.btn-primary {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-olive);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-moss);
+  border: 2px solid var(--color-moss);
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+}
+
+/* --- LISTINGS GRID --- */
+.listings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.listing-card {
+  background-color: #fafafa;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.listing-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.listing-card .dashboard-form {
+  gap: 1rem;
+}
+
+.listing-card .form-group input,
+.listing-card .form-group textarea,
+.listing-card .form-group select {
+  padding: 0.6rem 0.8rem;
+}
+
+.listing-card .form-group textarea {
+  min-height: 80px;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 0 1rem;
+    margin: 2rem auto;
+  }
+
+  .dashboard-section {
+    padding: 1.5rem;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+
+  .listings-grid {
+    grid-template-columns: 1fr;
+  }
+}
