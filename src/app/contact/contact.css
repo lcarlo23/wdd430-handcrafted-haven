@@ -1,0 +1,131 @@
+/* =========================================
+   CONTACT PAGE & FORM
+   ========================================= */
+
+.contact-page {
+  max-width: 800px;
+  margin: 4rem auto;
+  padding: 3rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(40, 54, 24, 0.08);
+  width: 100%;
+}
+
+.contact-page h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--color-moss);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.contact-page p {
+  text-align: center;
+  color: #555;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+.contact-page > p:last-of-type,
+.contact-administrator-form + p,
+p:has(span[aria-label='required']) {
+  font-size: 0.9rem;
+  color: #777;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+/* --- FORM STYLES --- */
+.contact-administrator-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact-administrator-form label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-moss);
+  font-size: 0.95rem;
+  margin-bottom: -0.8rem;
+  z-index: 1;
+}
+
+.contact-administrator-form span[aria-label='required'] {
+  color: #d9534f;
+  margin-left: 3px;
+  font-weight: bold;
+}
+
+.contact-administrator-form input,
+.contact-administrator-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.contact-administrator-form input:focus,
+.contact-administrator-form textarea:focus {
+  outline: none;
+  border-color: var(--color-olive);
+  box-shadow: 0 0 0 3px rgba(96, 108, 56, 0.15);
+  background-color: #ffffff;
+}
+
+.contact-administrator-form input[aria-invalid='true'],
+.contact-administrator-form textarea[aria-invalid='true'] {
+  border-color: #d9534f;
+}
+
+.contact-administrator-form input[aria-invalid='true']:focus,
+.contact-administrator-form textarea[aria-invalid='true']:focus {
+  box-shadow: 0 0 0 3px rgba(217, 83, 79, 0.15);
+}
+
+.contact-administrator-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* --- SUBMIT BUTTON --- */
+.submit-button {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+  margin-top: 1rem;
+}
+
+.submit-button:hover {
+  background-color: var(--color-olive);
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 2rem 1.5rem;
+    margin: 2rem auto;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+}
