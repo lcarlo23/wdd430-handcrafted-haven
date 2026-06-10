@@ -3,9 +3,9 @@
 import sql from '@/lib/db';
 
 export async function loadMoreProducts(
-  categoryId?: string, 
-  isOrganic?: boolean, 
-  isRecycled?: boolean, 
+  categoryId?: string,
+  isOrganic?: boolean,
+  isRecycled?: boolean,
   offset: number = 0
 ) {
   const limit = 9;
@@ -21,7 +21,7 @@ export async function loadMoreProducts(
       ORDER BY created_at DESC
       LIMIT ${limit} OFFSET ${offset}
     `;
-    
+
     return products;
   } catch (error) {
     console.error('Errore nel caricamento prodotti extra:', error);

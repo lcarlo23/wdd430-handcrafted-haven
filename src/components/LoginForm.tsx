@@ -1,23 +1,23 @@
-"use client";
+'use client';
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent } from 'react';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
-    console.log("Authentication payload:", { email, password });
+    setError('');
+    console.log('Authentication payload:', { email, password });
   };
 
   return (
     <div className="login-form-container">
       <h2 className="auth-heading">Account Login</h2>
       {error && <p className="auth-error-message">{error}</p>}
-      
+
       <form onSubmit={handleSubmit} className="auth-form">
         <div className="form-group">
           <label htmlFor="login-email">Email Address</label>

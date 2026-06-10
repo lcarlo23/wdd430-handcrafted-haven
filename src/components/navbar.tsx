@@ -4,18 +4,13 @@ import NavLinks from '@/components/navlinks';
 
 export default function NavBar() {
   return (
-    <div className='navbar'>
-      <Link className='navbar-home-link' href='/'>
-        <div className='navbar-logo'>
-          <Image
-            src='/logo.png'
-            alt='Handcrafted Haven logo'
-            width={200}
-            height={75}
-          />
+    <div className="navbar">
+      <Link className="navbar-home-link" href="/">
+        <div className="navbar-logo">
+          <Image src="/logo.png" alt="Handcrafted Haven logo" width={200} height={75} />
         </div>
       </Link>
-      <div className='nav-links'>
+      <div className="nav-links">
         <NavLinks />
       </div>
     </div>
