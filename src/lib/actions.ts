@@ -6,6 +6,8 @@ export async function loadMoreProducts(
   categoryId?: string,
   isOrganic?: boolean,
   isRecycled?: boolean,
+  minPrice?: string,
+  maxPrice?: string,
   offset: number = 0
 ) {
   const limit = 9;
