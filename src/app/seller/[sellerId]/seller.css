@@ -1,0 +1,139 @@
+/* =========================================
+   SELLER PAGE
+   ========================================= */
+
+.seller-page-wrapper {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 3rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(40, 54, 24, 0.08);
+  width: 100%;
+}
+
+/* --- SELLER PROFILE --- */
+.seller-profile-card {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3.5rem;
+  align-items: center;
+
+  padding-bottom: 3rem;
+  border-bottom: 2px solid rgba(40, 54, 24, 0.1);
+  margin-bottom: 3rem;
+}
+
+.seller-avatar {
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.seller-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.seller-info h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--color-moss);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.seller-bio {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.btn-contact-seller {
+  display: inline-block;
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  text-decoration: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-weight: bold;
+  font-size: 1rem;
+  width: fit-content;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.btn-contact-seller:hover {
+  background-color: var(--color-olive);
+  color: var(--color-cream);
+}
+
+/* --- PRODUCTS SECTION --- */
+.seller-products-section {
+  width: 100%;
+}
+
+.seller-products-section h2 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: var(--color-moss);
+  margin-bottom: 2rem;
+}
+
+.seller-products-section .main-product-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+  gap: 2.5rem !important;
+  width: 100%;
+}
+
+.seller-products-section .main-product-grid > * {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100%;
+}
+
+.seller-products-section .main-product-grid img {
+  width: 100% !important;
+  height: auto;
+  object-fit: cover;
+}
+
+.no-products-msg {
+  text-align: center;
+  padding: 3rem;
+  color: #777;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 850px) {
+  .seller-page-wrapper {
+    padding: 2rem 1.5rem;
+  }
+
+  .seller-profile-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .seller-avatar {
+    max-height: 300px;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .btn-contact-seller {
+    margin: 1rem auto 0 auto;
+  }
+}
