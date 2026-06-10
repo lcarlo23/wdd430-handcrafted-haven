@@ -35,7 +35,7 @@ export default function ProductReviewForm() {
     e.preventDefault();
     const dataFromForm = new FormData(e.target);
     setLoading(true);
-    const reviewerName = dataFromForm.get("reviewerName");
+    const reviewerName = dataFromForm.get('reviewerName');
     try {
       const result = await postReview(dataFromForm);
       if (result?.error) {
@@ -85,8 +85,11 @@ export default function ProductReviewForm() {
           Rating <span aria-label="required">*</span>
         </label>
         {/* Got help from Copilot on this feature.  Hopefully, that's okay, since it's an "extra" feature and not really the main focus of the class.  I typed all of this and adapted it to the overall app. */}
-        <ClickableStarRating rating={Number(formData.rating) || 0} onChange={(value) => setFormData({...formData, rating: String(value)})}/>
-          <input type="hidden" name="rating" value={formData.rating} required/>
+        <ClickableStarRating
+          rating={Number(formData.rating) || 0}
+          onChange={(value) => setFormData({ ...formData, rating: String(value) })}
+        />
+        <input type="hidden" name="rating" value={formData.rating} required />
         <label htmlFor="comment">
           Message <span aria-label="required">*</span>
         </label>

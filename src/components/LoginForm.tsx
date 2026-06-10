@@ -1,45 +1,53 @@
-"use client";
+'use client';
 
-import { useState, FormEvent } from "react";
-import { loginUser } from "@/app/account/actions";
+import { useState, FormEvent } from 'react';
+import { loginUser } from '@/app/account/actions';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setSuccess(false);
 
     // bind form data into a FormData object for server action processing
     const formData = new FormData();
-    formData.append("email", email);
-    formData.append("password", password);
+    formData.append('email', email);
+    formData.append('password', password);
 
     // dispatch the login action to the server and await the result
     const result = await loginUser(formData);
 
     if (!result.success) {
-      setError(result.error || "An unknown error occurred.");
+      setError(result.error || 'An unknown error occurred.');
     } else {
       // alert success
       setSuccess(true);
-      
+
       // clear form fields after successful login
-      setEmail("");
-      setPassword("");
+      setEmail('');
+      setPassword('');
     }
   };
 
   return (
     <div className="login-form-container">
       <h2 className="auth-heading">Login</h2>
-      
-      {error && <p className="auth-error-message" style={{ color: "red" }}>{error}</p>}
-      {success && <p className="auth-success-message" style={{ color: "green" }}>Logged in successfully!</p>}
+
+      {error && (
+        <p className="auth-error-message" style={{ color: 'red' }}>
+          {error}
+        </p>
+      )}
+      {success && (
+        <p className="auth-success-message" style={{ color: 'green' }}>
+          Logged in successfully!
+        </p>
+      )}
 
       <form onSubmit={handleSubmit} className="auth-form">
         <div className="form-group">

@@ -2,7 +2,7 @@
 
 import sql from '@/lib/db';
 import { z } from 'zod';
-import { Product, Review } from '@/lib/definitions';
+import { Product, Seller, Review } from '@/lib/definitions';
 
 export async function loadMoreProducts(
   categoryId?: string,
@@ -45,6 +45,21 @@ export async function fetchProduct(productId: string) {
   } catch (error) {
     console.error('Database error:', error);
     throw new Error('Failed to fetch product data.');
+  }
+}
+
+export async function fetchSellerbySellerId(sellerId: string) {
+  try {
+    const data = await sql<
+      Seller[]
+    >`SELECT id, name, email, bio, profile_image FROM sellers WHERE id = ${sellerId}`;
+    const seller = data.map((seller) => ({
+      ...seller,
+    }));
+    return seller[0];
+  } catch (error) {
+    console.error('Database error:', error);
+    throw new Error('Failed to fetch seller data by sellerID.');
   }
 }
 
@@ -94,7 +109,7 @@ export async function postReview(formData: FormData) {
   }
   const { product_id, reviewer_name, rating, comment } = validatedFields.data;
   try {
-    console.log("Rating:", rating)
+    console.log('Rating:', rating);
     await sql`INSERT INTO reviews (product_id, reviewer_name, rating, comment) VALUES (${product_id}, ${reviewer_name}, ${rating}, ${comment})`;
   } catch (error) {
     console.error('Database error:', error);

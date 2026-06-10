@@ -1,5 +1,6 @@
 import {
   fetchProduct,
+  fetchSellerbySellerId,
   fetchReviews,
   calulateReviewCountbyProductId,
   calulateAverageProductRating,
@@ -7,7 +8,9 @@ import {
 import StarRating from '@/components/StarRating';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import ProductReviewForm from "@/components/ProductReviewForm";
+import ProductReviewForm from '@/components/ProductReviewForm';
+import ProductReviewsTable from '@/components/ProductReviewsTable';
+import Link from 'next/link';
 
 export default async function ProductPage(props: { params: Promise<{ productId: string }> }) {
   const params = await props.params;
@@ -18,8 +21,30 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
     calulateAverageProductRating(Number(id)),
     calulateReviewCountbyProductId(Number(id)),
   ]);
+  const sellerId = product.seller_id;
+  const [seller] = await Promise.all([fetchSellerbySellerId(sellerId)]);
   const altText = `Image of ${product.title} product`;
   const priceText = `$${product.price}`;
+  let numberofReviewsText = '';
+  if (numberofReviews === 1) {
+    numberofReviewsText = `(${numberofReviews} review)`;
+  } else {
+    numberofReviewsText = `(${numberofReviews} reviews)`;
+  }
+  const checkSymbol = '✔'; // source of symbol:  https://symbolsdb.com/check-mark-symbol
+  const noSymbol = '✖'; // source of symbol:  https://symbolsdb.com/check-mark-symbol
+  let isOrganicText = '';
+  if (product.is_organic) {
+    isOrganicText = `${checkSymbol} Verified Organic`;
+  } else {
+    isOrganicText = `${noSymbol} Verified Organic`;
+  }
+  let isRecycledText = '';
+  if (product.is_recycled) {
+    isRecycledText = `${checkSymbol} Verified Recycled`;
+  } else {
+    isRecycledText = `${noSymbol} Verified Recycled`;
+  }
 
   if (!product) {
     notFound();
@@ -30,46 +55,30 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
       <div className="product-page">
         <h1>{product.title}</h1>
         <Image
-          src={product.imageUrl ? product.imageUrl : '/logo.png'}
+          src={product.imageUrl ? product.imageUrl : '/placeholder.jpg'}
           alt={altText}
-          width={200}
-          height={75}
-          loading='eager'
+          width={100}
+          height={100}
+          loading="eager"
         />
         <p className="product-price">{priceText}</p>
         <p className="product-description">{product.description}</p>
+        <p className="product-isOrganic">{isOrganicText}</p>
+        <p className="product-isRecycled">{isRecycledText}</p>
         <StarRating rating={averageRating} />
-        <span className="number-of-reviews">({numberofReviews})</span>
+        <span className="number-of-reviews">{numberofReviewsText}</span>
         <p className="product-seller-name">
-          ???Figure out how to put product seller's name and link to their page here???
+          Sold by:
+          <Link href={`/seller/${product.seller_id}`} className="product-page-seller-link">
+            {' '}
+            {seller.name}
+          </Link>
         </p>
+        <p className="product-purchase-text">{`E-mail seller to purchase this product: ${seller.email}.`}</p>
         <h2>Review this Product</h2>
         <ProductReviewForm />
         <h2>Product Reviews</h2>
-        <table className="product-reviews-table">
-          <thead>
-            <tr>
-              <th>Reviewer Name</th>
-              <th>Rating</th>
-              <th>Review</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reviews.length > 0 ? (
-              reviews.map((review) => (
-                <tr key={review.id}>
-                  <td>{review.reviewer_name}</td>
-                  <td><StarRating rating={review.rating}/></td>
-                  <td>{review.comment}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={3}>No reviews yet for this product</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <ProductReviewsTable reviews={reviews} />
       </div>
     </main>
   );

@@ -1,72 +1,72 @@
-"use client";
+'use client';
 
-import { useState, FormEvent, useRef } from "react";
-import { registerUser } from "@/app/account/actions";
+import { useState, FormEvent, useRef } from 'react';
+import { registerUser } from '@/app/account/actions';
 
 export default function RegisterForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [accountName, setAccountName] = useState("");
-  const [email, setEmail] = useState("");
-  const [bio, setBio] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [accountName, setAccountName] = useState('');
+  const [email, setEmail] = useState('');
+  const [bio, setBio] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [profileImage, setProfileImage] = useState<File | null>(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError('');
     setSuccess(false);
 
     // password confirmation check
     if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      setError('Passwords do not match.');
       return;
     }
 
     // security validation (Minimum 8 characters, at least 1 letter and 1 number)
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!passwordRegex.test(password)) {
-      setError("Password must be at least 8 characters long and contain both letters and numbers.");
+      setError('Password must be at least 8 characters long and contain both letters and numbers.');
       return;
     }
 
     // bind form data into a FormData object for server action processing
     const formData = new FormData();
-    formData.append("firstName", firstName);
-    formData.append("lastName", lastName);
-    formData.append("email", email);
-    formData.append("bio", bio);
-    formData.append("password", password);
-    formData.append("confirmPassword", confirmPassword);
+    formData.append('firstName', firstName);
+    formData.append('lastName', lastName);
+    formData.append('email', email);
+    formData.append('bio', bio);
+    formData.append('password', password);
+    formData.append('confirmPassword', confirmPassword);
     if (profileImage) {
-      formData.append("profileImage", profileImage);
+      formData.append('profileImage', profileImage);
     }
 
     // dispatch the registration action to the server and await the result
     const result = await registerUser(formData);
 
     if (!result.success) {
-      setError(result.error || "An unknown error occurred.");
+      setError(result.error || 'An unknown error occurred.');
     } else {
       // alert success
       setSuccess(true);
-      
+
       // clear form fields after successful registration
-      setFirstName("");
-      setLastName("");
-      setAccountName("");
-      setEmail("");
-      setBio("");
-      setPassword("");
-      setConfirmPassword("");
+      setFirstName('');
+      setLastName('');
+      setAccountName('');
+      setEmail('');
+      setBio('');
+      setPassword('');
+      setConfirmPassword('');
       setProfileImage(null);
       if (fileInputRef.current) {
-        fileInputRef.current.value = "";
+        fileInputRef.current.value = '';
       }
     }
   };
@@ -74,10 +74,18 @@ export default function RegisterForm() {
   return (
     <div className="register-form-container">
       <h2 className="auth-heading">Create Account</h2>
-      
+
       {/* Dynamic Status Notifications */}
-      {error && <p className="auth-error-message" style={{ color: "red" }}>{error}</p>}
-      {success && <p className="auth-success-message" style={{ color: "green" }}>Account created successfully!</p>}
+      {error && (
+        <p className="auth-error-message" style={{ color: 'red' }}>
+          {error}
+        </p>
+      )}
+      {success && (
+        <p className="auth-success-message" style={{ color: 'green' }}>
+          Account created successfully!
+        </p>
+      )}
 
       <form onSubmit={handleSubmit} className="auth-form">
         <div className="form-group">
