@@ -6,6 +6,8 @@ interface ProductGridProps {
   categoryId?: string;
   isOrganic?: boolean;
   isRecycled?: boolean;
+  minPrice?: string;
+  maxPrice?: string;
 }
 
 interface Category {
@@ -22,7 +24,13 @@ interface Product {
   is_recycled: boolean;
 }
 
-export default async function ProductGrid({ categoryId, isOrganic, isRecycled }: ProductGridProps) {
+export default async function ProductGrid({
+  categoryId,
+  isOrganic,
+  isRecycled,
+  minPrice,
+  maxPrice,
+}: ProductGridProps) {
   let initialProducts: Product[] = [];
   let categories: Category[] = [];
 
@@ -36,6 +44,8 @@ export default async function ProductGrid({ categoryId, isOrganic, isRecycled }:
       ${categoryId ? sql`AND category_id = ${categoryId}` : sql``}
       ${isOrganic ? sql`AND is_organic = true` : sql``}
       ${isRecycled ? sql`AND is_recycled = true` : sql``}
+      ${minPrice ? sql`AND price >= ${minPrice}` : sql``}
+      ${maxPrice ? sql`AND price <= ${maxPrice}` : sql``}
       ORDER BY created_at DESC
       LIMIT 9
     `;
@@ -43,7 +53,7 @@ export default async function ProductGrid({ categoryId, isOrganic, isRecycled }:
     console.error('Errore:', error);
   }
 
-  const currentFilters = { categoryId, isOrganic, isRecycled };
+  const currentFilters = { categoryId, isOrganic, isRecycled, minPrice, maxPrice };
   const filtersKey = JSON.stringify(currentFilters);
 
   return (
