@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 interface Product {
   id: number;
   title: string;
@@ -10,12 +12,12 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <div className="product-card">
+    <Link href={`/product/${product.id}`} className="product-card">
       <div className="image-placeholder"></div>
       <div className="product-details">
         <h3 className="product-name">{product.title}</h3>
         <p className="product-price">$ {product.price}</p>
       </div>
-    </div>
+    </Link>
   );
 }
