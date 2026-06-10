@@ -1,7 +1,8 @@
-import sql from "@/lib/db";
-import { updateSellerProfile, addProduct, updateProductListing } from "./actions";
+import sql from '@/lib/db';
+import { updateSellerProfile, addProduct, updateProductListing } from './actions';
+import './dashboard.css';
 
-const MOCK_SELLER_ID = "55555555-5555-5555-5555-555555555555";
+const MOCK_SELLER_ID = '55555555-5555-5555-5555-555555555555';
 
 interface Product {
   id: number;
@@ -28,10 +29,14 @@ interface Seller {
 }
 
 export default async function SellerDashboard() {
-  const sellers = await sql<Seller[]>`SELECT id, name, bio, profile_image FROM sellers WHERE id = ${MOCK_SELLER_ID}`;
+  const sellers = await sql<
+    Seller[]
+  >`SELECT id, name, bio, profile_image FROM sellers WHERE id = ${MOCK_SELLER_ID}`;
   const seller = sellers[0];
 
-  const products = await sql<Product[]>`SELECT id, category_id, title, description, price, stock_quantity, image_url, is_organic, is_recycled FROM products WHERE seller_id = ${MOCK_SELLER_ID} ORDER BY id ASC`;
+  const products = await sql<
+    Product[]
+  >`SELECT id, category_id, title, description, price, stock_quantity, image_url, is_organic, is_recycled FROM products WHERE seller_id = ${MOCK_SELLER_ID} ORDER BY id ASC`;
   const categories = await sql<Category[]>`SELECT id, name FROM categories`;
 
   if (!seller) {
@@ -52,13 +57,20 @@ export default async function SellerDashboard() {
           </div>
           <div className="form-group">
             <label>Biography</label>
-            <textarea name="bio" defaultValue={seller.bio || ""} required />
+            <textarea name="bio" defaultValue={seller.bio || ''} required />
           </div>
           <div className="form-group">
             <label>Profile Image URL</label>
-            <input type="text" name="profile_image" defaultValue={seller.profile_image || ""} required />
+            <input
+              type="text"
+              name="profile_image"
+              defaultValue={seller.profile_image || ''}
+              required
+            />
           </div>
-          <button type="submit" className="btn-primary">Save Profile Changes</button>
+          <button type="submit" className="btn-primary">
+            Save Profile Changes
+          </button>
         </form>
       </section>
 
@@ -75,7 +87,9 @@ export default async function SellerDashboard() {
             <select name="category_id" required>
               <option value="">Select Category</option>
               {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                <option key={cat.id} value={cat.id}>
+                  {cat.name}
+                </option>
               ))}
             </select>
           </div>
@@ -103,7 +117,9 @@ export default async function SellerDashboard() {
               <input type="checkbox" name="is_recycled" value="true" /> Recycled
             </label>
           </div>
-          <button type="submit" className="btn-primary">Publish Product</button>
+          <button type="submit" className="btn-primary">
+            Publish Product
+          </button>
         </form>
       </section>
 
@@ -115,44 +131,71 @@ export default async function SellerDashboard() {
             <div key={product.id} className="listing-card">
               <form action={updateProductListing} className="dashboard-form">
                 <input type="hidden" name="id" value={product.id} />
-                
+
                 <div className="form-group">
                   <label>Title</label>
                   <input type="text" name="title" defaultValue={product.title} required />
                 </div>
                 <div className="form-group">
                   <label>Category</label>
-                  <select name="category_id" defaultValue={product.category_id || ""} required>
+                  <select name="category_id" defaultValue={product.category_id || ''} required>
                     {categories.map((cat) => (
-                      <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
+                      </option>
                     ))}
                   </select>
                 </div>
                 <div className="form-group">
                   <label>Description</label>
-                  <textarea name="description" defaultValue={product.description || ""} required />
+                  <textarea name="description" defaultValue={product.description || ''} required />
                 </div>
                 <div className="form-group">
                   <label>Price</label>
-                  <input type="number" name="price" step="0.01" defaultValue={product.price} required />
+                  <input
+                    type="number"
+                    name="price"
+                    step="0.01"
+                    defaultValue={product.price}
+                    required
+                  />
                 </div>
                 <div className="form-group">
                   <label>Stock</label>
-                  <input type="number" name="stock_quantity" defaultValue={product.stock_quantity} required />
+                  <input
+                    type="number"
+                    name="stock_quantity"
+                    defaultValue={product.stock_quantity}
+                    required
+                  />
                 </div>
                 <div className="form-group">
                   <label>Image URL</label>
-                  <input type="text" name="image_url" defaultValue={product.image_url || ""} />
+                  <input type="text" name="image_url" defaultValue={product.image_url || ''} />
                 </div>
                 <div className="form-checkbox-group">
                   <label>
-                    <input type="checkbox" name="is_organic" value="true" defaultChecked={product.is_organic} /> Organic
+                    <input
+                      type="checkbox"
+                      name="is_organic"
+                      value="true"
+                      defaultChecked={product.is_organic}
+                    />{' '}
+                    Organic
                   </label>
                   <label>
-                    <input type="checkbox" name="is_recycled" value="true" defaultChecked={product.is_recycled} /> Recycled
+                    <input
+                      type="checkbox"
+                      name="is_recycled"
+                      value="true"
+                      defaultChecked={product.is_recycled}
+                    />{' '}
+                    Recycled
                   </label>
                 </div>
-                <button type="submit" className="btn-secondary">Update Listing</button>
+                <button type="submit" className="btn-secondary">
+                  Update Listing
+                </button>
               </form>
             </div>
           ))}
