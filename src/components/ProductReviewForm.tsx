@@ -84,7 +84,6 @@ export default function ProductReviewForm() {
         <label htmlFor="rating">
           Rating <span aria-label="required">*</span>
         </label>
-        {/* Got help from Copilot on this feature.  Hopefully, that's okay, since it's an "extra" feature and not really the main focus of the class.  I typed all of this and adapted it to the overall app. */}
         <ClickableStarRating
           rating={Number(formData.rating) || 0}
           onChange={(value) => setFormData({ ...formData, rating: String(value) })}
