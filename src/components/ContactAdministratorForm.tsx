@@ -1,4 +1,4 @@
-// Got some help from here:  https://youtu.be/VLvecZISYqw?si=UVzt6GE83rA8lNPL, a Bing search for "pop-up submission success message for form submission react next.js and https://unwiredlearning.com/blog/react-accessible-forms"
+// Got some help from here:  https://youtu.be/VLvecZISYqw?si=UVzt6GE83rA8lNPL, a Bing search for "pop-up submission success message for form submission react next.js" and https://unwiredlearning.com/blog/react-accessible-forms"
 
 'use client';
 
