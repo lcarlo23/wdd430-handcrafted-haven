@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import LoginForm from '@/components/LoginForm';
 import RegisterForm from '@/components/RegisterForm';
+import './account.css';
 
 export default function AccountPage() {
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');

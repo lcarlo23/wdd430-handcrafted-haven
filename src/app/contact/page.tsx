@@ -1,4 +1,5 @@
 import ContactAdministratorForm from '@/components/ContactAdministratorForm';
+import './contact.css';
 
 export default function ContactPage() {
   return (

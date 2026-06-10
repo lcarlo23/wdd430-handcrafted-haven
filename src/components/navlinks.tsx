@@ -5,7 +5,6 @@ import Link from 'next/link';
 // Map of links to display in the navigation.
 const links = [
   { name: 'Account', href: '/account' },
-  { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
 
