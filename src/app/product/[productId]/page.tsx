@@ -11,6 +11,7 @@ import Image from 'next/image';
 import ProductReviewForm from '@/components/ProductReviewForm';
 import ProductReviewsTable from '@/components/ProductReviewsTable';
 import Link from 'next/link';
+import './product.css';
 
 export default async function ProductPage(props: { params: Promise<{ productId: string }> }) {
   const params = await props.params;
@@ -75,10 +76,13 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
           </Link>
         </p>
         <p className="product-purchase-text">{`E-mail seller to purchase this product: ${seller.email}.`}</p>
-        <h2>Review this Product</h2>
-        <ProductReviewForm />
-        <h2>Product Reviews</h2>
-        <ProductReviewsTable reviews={reviews} />
+
+        <div className="product-reviews-section">
+          <h2>Customer Reviews</h2>
+          <ProductReviewsTable reviews={reviews} />
+          <h2>Review this Product</h2>
+          <ProductReviewForm />
+        </div>
       </div>
     </main>
   );
