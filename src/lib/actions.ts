@@ -18,6 +18,8 @@ export async function loadMoreProducts(
       ${categoryId ? sql`AND category_id = ${categoryId}` : sql``}
       ${isOrganic ? sql`AND is_organic = true` : sql``}
       ${isRecycled ? sql`AND is_recycled = true` : sql``}
+      ${minPrice ? sql`AND price >= ${minPrice}` : sql``}
+      ${maxPrice ? sql`AND price <= ${maxPrice}` : sql``}
       ORDER BY created_at DESC
       LIMIT ${limit} OFFSET ${offset}
     `;
