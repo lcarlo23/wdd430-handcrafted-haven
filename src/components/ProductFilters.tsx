@@ -20,6 +20,8 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
     const categoryId = formData.get('category') as string;
     const isOrganic = formData.get('organic');
     const isRecycled = formData.get('recycled');
+    const minPrice = formData.get('minPrice') as string;
+    const maxPrice = formData.get('maxPrice') as string;
 
     const params = new URLSearchParams(searchParams.toString());
 
@@ -31,6 +33,12 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
 
     if (isRecycled) params.set('recycled', 'true');
     else params.delete('recycled');
+
+    if (minPrice) params.set('minPrice', minPrice);
+    else params.delete('minPrice');
+
+    if (maxPrice) params.set('maxPrice', maxPrice);
+    else params.delete('maxPrice');
 
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
@@ -53,6 +61,31 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="filter-group price-group">
+        <label>Price ($):</label>
+        <div className="price-inputs">
+          <input
+            type="number"
+            name="minPrice"
+            placeholder="Min"
+            min="0"
+            step="0.01"
+            defaultValue={searchParams.get('minPrice') || ''}
+            className="price-input"
+          />
+          <span> - </span>
+          <input
+            type="number"
+            name="maxPrice"
+            placeholder="Max"
+            min="0"
+            step="0.01"
+            defaultValue={searchParams.get('maxPrice') || ''}
+            className="price-input"
+          />
+        </div>
       </div>
 
       <div className="filter-group checkbox-group">

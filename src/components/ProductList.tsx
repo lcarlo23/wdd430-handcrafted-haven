@@ -17,6 +17,8 @@ interface FilterProps {
   categoryId?: string;
   isOrganic?: boolean;
   isRecycled?: boolean;
+  minPrice?: string;
+  maxPrice?: string;
 }
 
 export default function ProductList({
@@ -38,6 +40,8 @@ export default function ProductList({
       filters.categoryId,
       filters.isOrganic,
       filters.isRecycled,
+      filters.minPrice,
+      filters.maxPrice,
       offset
     );
 

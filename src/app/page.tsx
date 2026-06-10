@@ -14,6 +14,10 @@ export default async function Home({
   const isRecycled = resolvedParams?.recycled === 'true';
   const categoryId =
     typeof resolvedParams?.category === 'string' ? resolvedParams.category : undefined;
+  const minPrice =
+    typeof resolvedParams?.minPrice === 'string' ? resolvedParams.minPrice : undefined;
+  const maxPrice =
+    typeof resolvedParams?.maxPrice === 'string' ? resolvedParams.maxPrice : undefined;
 
   return (
     <div className={styles.page}>
@@ -24,7 +28,13 @@ export default async function Home({
           gridClass="product-grid"
         />
         <FeaturedHandcrafter sellerId="33333333-3333-3333-3333-333333333333" />
-        <ProductGrid categoryId={categoryId} isOrganic={isOrganic} isRecycled={isRecycled} />
+        <ProductGrid
+          categoryId={categoryId}
+          isOrganic={isOrganic}
+          isRecycled={isRecycled}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+        />
       </main>
     </div>
   );
