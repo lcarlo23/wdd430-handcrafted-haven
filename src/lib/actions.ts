@@ -121,7 +121,7 @@ export async function calulateReviewCountbyProductId(productId: number) {
   try {
     const data =
       await sql<any>`SELECT COUNT(*) AS num_ratings FROM reviews WHERE product_id = ${productId}`;
-    const result = data[0]?.num_ratings; // Got help here from Copilot because I couldn't figure out how to extract the numeric value that was being returned from the SQL query
+    const result = data[0]?.num_ratings;
     return result !== null ? Number(result) : 0;
   } catch (error) {
     console.error('Database error:', error);
@@ -133,7 +133,7 @@ export async function calulateAverageProductRating(productId: number) {
   try {
     const data =
       await sql<any>`SELECT ROUND(AVG(rating)::NUMERIC, 2) AS avg_rating FROM reviews WHERE product_id = ${productId}`;
-    const result = data[0]?.avg_rating; // Got help here from Copilot because I couldn't figure out how to extract the numeric value that was being returned from the SQL query
+    const result = data[0]?.avg_rating;
     return result !== null ? Number(result) : 0;
   } catch (error) {
     console.error('Database error:', error);

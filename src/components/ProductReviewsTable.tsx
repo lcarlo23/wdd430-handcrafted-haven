@@ -1,7 +1,6 @@
 import StarRating from '@/components/StarRating';
 import { Review } from '@/lib/definitions';
 
-// Got help from Bing searches for this code and from the next.js tutorial (table.tsx file) and Copilot tutoring when I moved it from the page.tsx file to this component file
 export default function ProductReviewsTable({ reviews }: { reviews: Review[] }) {
   return (
     <table className="product-reviews-table">

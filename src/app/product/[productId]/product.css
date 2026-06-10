@@ -1,0 +1,315 @@
+/* =========================================
+   PRODUCT PAGE
+   ========================================= */
+
+.product-page {
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 3rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(40, 54, 24, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1rem 3.5rem;
+  align-items: start;
+}
+
+.product-page > img {
+  grid-column: 1;
+  grid-row: 1 / span 10;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.product-page > h1,
+.product-page > .product-price,
+.product-page > .product-description,
+.product-page > .product-isOrganic,
+.product-page > .product-isRecycled,
+.product-page > .number-of-reviews,
+.product-page > .product-seller-name,
+.product-page > .product-purchase-button {
+  grid-column: 2;
+  margin: 0;
+}
+
+/* --- TEXT STYLES --- */
+.product-page > h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--color-moss);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.product-price {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--color-olive);
+  margin-bottom: 1.5rem !important;
+}
+
+.product-description {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  line-height: 1.8;
+  margin-bottom: 1.5rem !important;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 1.5rem;
+}
+
+.product-isOrganic,
+.product-isRecycled {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-moss);
+  background-color: #f8f9fa;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 0.8rem !important;
+  border: 1px solid #e2e8f0;
+}
+
+.number-of-reviews {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem !important;
+  display: block;
+}
+
+.product-seller-name {
+  font-size: 1.05rem;
+  color: #555;
+  margin-top: 1rem !important;
+  padding-top: 1rem;
+}
+
+.product-page-seller-link {
+  color: var(--color-copper);
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.product-page-seller-link:hover {
+  color: var(--color-moss);
+  text-decoration: underline;
+}
+
+/* =========================================
+   PRODUCT REVIEWS
+   ========================================= */
+
+.product-reviews-section {
+  grid-column: 1 / -1;
+  margin-top: 3rem;
+  border-top: 2px solid rgba(40, 54, 24, 0.15);
+  padding-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.product-reviews-section h2 {
+  font-family: var(--font-heading);
+  color: var(--color-moss);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-reviews-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(40, 54, 24, 0.05);
+}
+
+.product-reviews-table thead {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+}
+
+.product-reviews-table th {
+  padding: 1.2rem 1rem;
+  text-align: left;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 1.05rem;
+}
+
+.product-reviews-table td {
+  padding: 1.2rem 1rem;
+  border-bottom: 1px solid #eaeaea;
+  color: #4a4a4a;
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.product-reviews-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.product-reviews-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.product-reviews-table td[colSpan='3'] {
+  text-align: center;
+  padding: 3rem;
+  font-style: italic;
+  color: #777;
+}
+
+.product-reviews-table + h2 {
+  border-top: 2px solid rgba(40, 54, 24, 0.15);
+  padding-top: 2rem;
+}
+
+/* =========================================
+   PRODUCT REVIEW FORM
+   ========================================= */
+
+.product-review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 700px;
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+}
+
+.product-review-form label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-moss);
+  font-size: 0.95rem;
+  margin-bottom: -0.8rem;
+}
+
+.product-review-form span[aria-label='required'] {
+  color: #d9534f;
+  margin-left: 3px;
+  font-weight: bold;
+}
+
+.product-review-form input[type='text'],
+.product-review-form textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.product-review-form input[type='text']:focus,
+.product-review-form textarea:focus {
+  outline: none;
+  border-color: var(--color-olive);
+  box-shadow: 0 0 0 3px rgba(96, 108, 56, 0.15);
+  background-color: #ffffff;
+}
+
+.product-review-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.product-review-form input[aria-invalid='true'],
+.product-review-form textarea[aria-invalid='true'] {
+  border-color: #d9534f;
+}
+
+.product-review-form .submit-button {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+.product-review-form .submit-button:hover:not(:disabled) {
+  background-color: var(--color-olive);
+}
+
+.product-review-form .submit-button:disabled {
+  background-color: #a8b0a2;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN (Smartphone & Tablet)
+   ========================================= */
+@media (max-width: 850px) {
+  .product-page {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    margin: 2rem auto;
+    gap: 1rem;
+  }
+
+  .product-page > img {
+    margin-bottom: 1rem;
+  }
+
+  .product-page > h1 {
+    font-size: 2rem;
+  }
+
+  .product-price {
+    font-size: 1.6rem;
+  }
+
+  .product-reviews-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .product-review-form .submit-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-reviews-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .product-review-form .submit-button {
+    width: 100%;
+  }
+}
