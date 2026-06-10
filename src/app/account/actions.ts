@@ -3,6 +3,7 @@
 import sql from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { createHash } from "crypto";
+import { put } from "@vercel/blob";
 
 export async function registerUser(formData: FormData) {
   const firstName = formData.get("firstName") as string;
@@ -11,6 +12,7 @@ export async function registerUser(formData: FormData) {
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirmPassword") as string;
   const bio = formData.get("bio") as string;
+  const imageFile = formData.get("profileImage") as File;
 
   // check if password and confirmPassword match
   if (password !== confirmPassword) {
@@ -35,10 +37,20 @@ export async function registerUser(formData: FormData) {
     const fullName = `${firstName} ${lastName}`;
     const hashedPassword = createHash("sha256").update(password).digest("hex");
 
+    let profileImageUrl = "/placeholder.jpg";
+
+    // stream the file to Vercel Storage if it exists
+    if (imageFile && imageFile.size > 0) {
+      const blob = await put(`profiles/${Date.now()}-${imageFile.name}`, imageFile, {
+        access: "public",
+      });
+      profileImageUrl = blob.url;
+    }
+
     // insert the new record directly into the sellers table
     await sql`
       INSERT INTO sellers (name, email, password_hash, bio, profile_image)
-      VALUES (${fullName}, ${email}, ${hashedPassword}, ${bio || ''}, '/placeholder.jpg')
+      VALUES (${fullName}, ${email}, ${hashedPassword}, ${bio || ''}, ${profileImageUrl})
     `;
 
     revalidatePath("/account");

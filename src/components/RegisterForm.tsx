@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef } from "react";
 import { registerUser } from "@/app/account/actions";
 
 export default function RegisterForm() {
@@ -11,8 +11,12 @@ export default function RegisterForm() {
   const [bio, setBio] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [profileImage, setProfileImage] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError("");
@@ -39,6 +43,9 @@ export default function RegisterForm() {
     formData.append("bio", bio);
     formData.append("password", password);
     formData.append("confirmPassword", confirmPassword);
+    if (profileImage) {
+      formData.append("profileImage", profileImage);
+    }
 
     // dispatch the registration action to the server and await the result
     const result = await registerUser(formData);
@@ -57,6 +64,10 @@ export default function RegisterForm() {
       setBio("");
       setPassword("");
       setConfirmPassword("");
+      setProfileImage(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     }
   };
 
@@ -118,13 +129,29 @@ export default function RegisterForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="reg-bio">Biography</label>
+          <label htmlFor="reg-bio">Short Bio</label>
           <textarea
             id="reg-bio"
             className="auth-input"
             value={bio}
             onChange={(e) => setBio(e.target.value)}
             rows={3}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="reg-image">Profile Picture</label>
+          <input
+            id="reg-image"
+            type="file"
+            ref={fileInputRef}
+            className="auth-input"
+            accept="image/*"
+            onChange={(e) => {
+              if (e.target.files && e.target.files.length > 0) {
+                setProfileImage(e.target.files[0]);
+              }
+            }}
           />
         </div>
 
