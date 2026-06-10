@@ -116,7 +116,8 @@ a:hover {
   text-align: center;
 }
 
-.product-grid {
+.product-grid,
+.seller-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(10rem, 15rem));
   gap: 2rem;
@@ -126,7 +127,8 @@ a:hover {
 }
 
 /* --- Product Card --- */
-.product-card {
+.product-card,
+.seller-card {
   background-color: #ffffff;
   border-radius: 8px;
   overflow: hidden;
@@ -141,15 +143,19 @@ a:hover {
   min-width: 10rem;
 }
 
-.product-card:hover {
+.product-card:hover,
+.seller-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(40, 54, 24, 0.15);
 }
 
-.image-placeholder {
-  width: 100%;
+.image-placeholder,
+.card-image {
+  width: auto;
+  height: auto;
   aspect-ratio: 1;
   background-color: #e2e8f0;
+  object-fit: cover;
 }
 
 .product-details {

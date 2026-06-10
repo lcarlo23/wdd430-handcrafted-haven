@@ -1,0 +1,51 @@
+/* =========================================
+   SELLERS PAGE (stile simile a contact-page)
+   ========================================= */
+
+.sellers-page {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 3rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(40, 54, 24, 0.08);
+  width: 100%;
+}
+
+.sellers-page h1 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--color-moss);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.sellers-page p {
+  text-align: center;
+  color: #555;
+  font-size: 1.05rem;
+  margin-bottom: 2.5rem;
+}
+
+/* --- GRID SELLERS --- */
+.sellers-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 2rem;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .sellers-page {
+    padding: 2rem 1.5rem;
+    margin: 2rem auto;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid #eaeaea;
+    border-bottom: 1px solid #eaeaea;
+  }
+
+  .sellers-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
