@@ -1,29 +1,29 @@
 // Got some help from here:  https://youtu.be/VLvecZISYqw?si=UVzt6GE83rA8lNPL, a Bing search for "pop-up submission success message for form submission react next.js and https://unwiredlearning.com/blog/react-accessible-forms"
 
-"use client";
+'use client';
 
-import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function ContactAdministratorForm() {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    tel: "",
-    message: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    tel: '',
+    message: '',
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
   const handleBlur = (e: any) => {
-    if (e === "") {
-      setError("Please complete this field");
+    if (e === '') {
+      setError('Please complete this field');
     } else {
-      setError("");
+      setError('');
     }
   };
 
@@ -34,17 +34,17 @@ export default function ContactAdministratorForm() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
       toast.success(
-        `Your message has been received, ${firstName}! Thanks for contacting Handcrafted Haven!`,
+        `Your message has been received, ${firstName}! Thanks for contacting Handcrafted Haven!`
       );
       setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        tel: "",
-        message: "",
+        firstName: '',
+        lastName: '',
+        email: '',
+        tel: '',
+        message: '',
       });
     } catch {
-      toast.error("Something went wrong!");
+      toast.error('Something went wrong!');
     }
   };
 
@@ -62,8 +62,8 @@ export default function ContactAdministratorForm() {
           value={formData.firstName}
           onChange={handleChange}
           onBlur={handleBlur}
-          aria-invalid={error ? "true" : "false"}
-          aria-describedby={error ? "error" : undefined}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'error' : undefined}
           title="Please enter your first name"
           placeholder="First Name"
           required
@@ -78,8 +78,8 @@ export default function ContactAdministratorForm() {
           value={formData.lastName}
           onChange={handleChange}
           onBlur={handleBlur}
-          aria-invalid={error ? "true" : "false"}
-          aria-describedby={error ? "error" : undefined}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'error' : undefined}
           title="Please enter your last name"
           placeholder="Last Name"
           required
@@ -95,8 +95,8 @@ export default function ContactAdministratorForm() {
           value={formData.email}
           onChange={handleChange}
           onBlur={handleBlur}
-          aria-invalid={error ? "true" : "false"}
-          aria-describedby={error ? "error" : undefined}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'error' : undefined}
           title="Please enter your e-mail address"
           placeholder="E-mail address"
           required
@@ -109,8 +109,8 @@ export default function ContactAdministratorForm() {
           value={formData.tel}
           onChange={handleChange}
           onBlur={handleBlur}
-          aria-invalid={error ? "true" : "false"}
-          aria-describedby={error ? "error" : undefined}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'error' : undefined}
           title="Please enter your phone number"
           placeholder="Telephone number"
         />
@@ -122,8 +122,8 @@ export default function ContactAdministratorForm() {
           value={formData.message}
           onChange={handleChange}
           onBlur={handleBlur}
-          aria-invalid={error ? "true" : "false"}
-          aria-describedby={error ? "error" : undefined}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'error' : undefined}
           placeholder="Type message here..."
           rows={3}
           required

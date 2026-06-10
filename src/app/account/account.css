@@ -1,0 +1,122 @@
+/* =========================================
+   ACCOUNT & AUTHENTICATION PAGE
+   ========================================= */
+
+.auth-page-container {
+  max-width: 450px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+/* --- TOGGLE BUTTONS --- */
+.auth-toggle-buttons {
+  display: flex;
+  background-color: #e2e8f0;
+  border-radius: 8px;
+  padding: 0.3rem;
+  margin-bottom: 2rem;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  color: #555;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover:not(.active) {
+  color: var(--color-moss);
+}
+
+.toggle-btn.active {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  box-shadow: 0 2px 8px rgba(40, 54, 24, 0.2);
+}
+
+.auth-form-wrapper {
+  background-color: #ffffff;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(40, 54, 24, 0.08);
+}
+
+/* --- LOGIN & REGISTER FORMS --- */
+
+.auth-form-wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.auth-form-wrapper label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--color-moss);
+  font-size: 0.95rem;
+  margin-bottom: -0.8rem;
+}
+
+.auth-form-wrapper input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9fafb;
+  transition: all 0.3s ease;
+}
+
+.auth-form-wrapper input:focus {
+  outline: none;
+  border-color: var(--color-olive);
+  box-shadow: 0 0 0 3px rgba(96, 108, 56, 0.15);
+  background-color: #ffffff;
+}
+
+.auth-form-wrapper button[type='submit'] {
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  border: none;
+  padding: 1rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-family: var(--font-body);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.auth-form-wrapper button[type='submit']:hover {
+  background-color: var(--color-olive);
+}
+
+.auth-form-wrapper .error-message {
+  color: #d9534f;
+  font-size: 0.85rem;
+  margin-top: -0.8rem;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 480px) {
+  .auth-page-container {
+    padding: 0 1rem;
+    margin: 2rem auto;
+  }
+
+  .auth-form-wrapper {
+    padding: 1.5rem;
+  }
+}

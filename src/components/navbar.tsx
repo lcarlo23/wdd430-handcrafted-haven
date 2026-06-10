@@ -12,11 +12,10 @@ export default function NavBar() {
             alt='Handcrafted Haven logo'
             width={200}
             height={75}
-            loading='eager'
           />
         </div>
       </Link>
-      <div className='nav-links'>
+      <div className="nav-links">
         <NavLinks />
       </div>
     </div>

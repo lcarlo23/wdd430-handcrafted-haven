@@ -1,40 +1,40 @@
-"use client";
+'use client';
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent } from 'react';
 
 export default function RegisterForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [accountName, setAccountName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [accountName, setAccountName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");
+    setError('');
 
     // Password confirmation check
     if (password !== confirmPassword) {
-      setError("Passwords do not match.");
+      setError('Passwords do not match.');
       return;
     }
 
     // Standard security validation (Minimum 8 characters, at least 1 letter and 1 number)
     const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     if (!passwordRegex.test(password)) {
-      setError("Password must be at least 8 characters long and contain both letters and numbers.");
+      setError('Password must be at least 8 characters long and contain both letters and numbers.');
       return;
     }
 
     // Payload structure for backend submission
-    console.log("Registration payload:", { 
-      firstName, 
-      lastName, 
-      accountName, 
-      email, 
-      password 
+    console.log('Registration payload:', {
+      firstName,
+      lastName,
+      accountName,
+      email,
+      password,
     });
   };
 

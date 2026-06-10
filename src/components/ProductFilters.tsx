@@ -39,8 +39,10 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
     router.replace(pathname, { scroll: false });
   };
 
+  const formKey = searchParams.toString();
+
   return (
-    <form action={handleFilter} className="filter-bar">
+    <form key={formKey} action={handleFilter} className="filter-bar">
       <div className="filter-group">
         <label htmlFor="category">Category:</label>
         <select name="category" id="category" defaultValue={searchParams.get('category') || ''}>
