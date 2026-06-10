@@ -1,5 +1,6 @@
 import sql from '@/lib/db';
 import Image from 'next/image';
+import Link from 'next/link';
 
 export default async function FeaturedHandcrafter({ sellerId }: { sellerId: string }) {
   let artisan = null;
@@ -38,6 +39,9 @@ export default async function FeaturedHandcrafter({ sellerId }: { sellerId: stri
         <div className="handcrafter-info">
           <h3>Meet {artisan.name}</h3>
           <p>{artisan.bio}</p>
+          <Link href={`/seller/${sellerId}`} className="btn-load-more">
+            Read their Story
+          </Link>
         </div>
       </div>
     </section>
