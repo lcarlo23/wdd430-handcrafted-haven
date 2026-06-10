@@ -12,6 +12,7 @@ export default function NavBar() {
             alt='Handcrafted Haven logo'
             width={200}
             height={75}
+            loading='eager'
           />
         </div>
       </Link>

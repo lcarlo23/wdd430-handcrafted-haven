@@ -6,7 +6,7 @@ const StarRating: React.FC<StarRatingProps> = ({
     rating,
     max = 5,
     size = 24,
-    color = "#FFD700",
+    color = "black",
   }) => {
     const safeRating = Math.max(0, Math.min(rating, max));
     const stars = Array.from({ length: max }, (_, i) => {

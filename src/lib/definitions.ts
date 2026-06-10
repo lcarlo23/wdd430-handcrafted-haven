@@ -13,10 +13,10 @@ export type Product = {
 
 export type Review = {
   id: string;
-  productId: number;
-  userId: string;
+  product_id: number;
+  reviewer_name: string;
   rating: number;
-  description: string;
+  comment: string;
 };
 
 // Got help from a Bing search for "represent a number in stars as in a product rating react next.js typescript"
@@ -25,4 +25,12 @@ export interface StarRatingProps {
   max?: number;
   size?: number;
   color?: string;
+}
+
+export interface ClickableStarRatingProps {
+  rating: number;
+  max?: number;
+  size?: number;
+  color?: string;
+  onChange?: (value: number) => void;
 }
