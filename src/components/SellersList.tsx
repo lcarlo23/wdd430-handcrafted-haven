@@ -7,7 +7,7 @@ interface Seller {
   profile_image: string;
 }
 
-export default async function SellerList() {
+export default async function SellersList() {
   let sellers: Seller[] = [];
 
   try {
@@ -21,14 +21,10 @@ export default async function SellerList() {
   }
 
   return (
-    <section className="seller-section">
-      <h2 className="section-title">All Sellers</h2>
-
-      <div className="seller-grid">
-        {sellers.map((seller) => (
-          <SellerCard key={seller.id} seller={seller} />
-        ))}
-      </div>
+    <section className="seller-grid">
+      {sellers.map((seller) => (
+        <SellerCard key={seller.id} seller={seller} />
+      ))}
     </section>
   );
 }
