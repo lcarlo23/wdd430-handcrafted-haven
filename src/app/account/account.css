@@ -65,7 +65,8 @@
   margin-bottom: -0.8rem;
 }
 
-.auth-form-wrapper input {
+.auth-form-wrapper input,
+.auth-form-wrapper textarea {
   width: 100%;
   padding: 0.8rem 1rem;
   border: 1px solid #d1d5db;
@@ -77,11 +78,17 @@
   transition: all 0.3s ease;
 }
 
-.auth-form-wrapper input:focus {
+.auth-form-wrapper input:focus,
+.auth-form-wrapper textarea:focus {
   outline: none;
   border-color: var(--color-olive);
   box-shadow: 0 0 0 3px rgba(96, 108, 56, 0.15);
   background-color: #ffffff;
+}
+
+.auth-form-wrapper textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .auth-form-wrapper button[type='submit'] {
@@ -109,6 +116,19 @@
   margin-top: -0.8rem;
 }
 
+.required-fields-note {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0 0 0.5rem 0;
+  text-align: left;
+}
+
+.auth-form span[aria-label='required'] {
+  color: #d9534f;
+  margin-left: 3px;
+  font-weight: bold;
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 480px) {
   .auth-page-container {
@@ -119,4 +139,31 @@
   .auth-form-wrapper {
     padding: 1.5rem;
   }
+}
+
+/* =========================================
+   AUTHENTICATION MESSAGES (Error & Success)
+   ========================================= */
+
+.auth-error-message {
+  color: #d9534f;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  background-color: #fdf2f2;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #f5c6c5;
+}
+
+.auth-success-message {
+  color: var(--color-moss);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f4f8f4;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-olive);
 }
