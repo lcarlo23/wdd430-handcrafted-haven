@@ -65,7 +65,8 @@
   margin-bottom: -0.8rem;
 }
 
-.auth-form-wrapper input {
+.auth-form-wrapper input,
+.auth-form-wrapper textarea {
   width: 100%;
   padding: 0.8rem 1rem;
   border: 1px solid #d1d5db;
@@ -77,11 +78,17 @@
   transition: all 0.3s ease;
 }
 
-.auth-form-wrapper input:focus {
+.auth-form-wrapper input:focus,
+.auth-form-wrapper textarea:focus {
   outline: none;
   border-color: var(--color-olive);
   box-shadow: 0 0 0 3px rgba(96, 108, 56, 0.15);
   background-color: #ffffff;
+}
+
+.auth-form-wrapper textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .auth-form-wrapper button[type='submit'] {
