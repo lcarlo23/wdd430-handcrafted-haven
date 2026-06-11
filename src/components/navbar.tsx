@@ -7,7 +7,7 @@ export default function NavBar() {
     <div className="navbar">
       <Link className="navbar-home-link" href="/">
         <div className="navbar-logo">
-          <Image src="/logo.png" alt="Handcrafted Haven logo" width={200} height={75} />
+          <Image src="/logo.png" alt="Handcrafted Haven logo" width={200} height={67} />
         </div>
       </Link>
       <div className="nav-links">

@@ -70,6 +70,7 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
             type="number"
             name="minPrice"
             placeholder="Min"
+            aria-label="Minimum Price"
             min="0"
             step="0.01"
             defaultValue={searchParams.get('minPrice') || ''}
@@ -80,6 +81,7 @@ export default function ProductFilters({ categories }: ProductFiltersProps) {
             type="number"
             name="maxPrice"
             placeholder="Max"
+            aria-label="Maximum Price"
             min="0"
             step="0.01"
             defaultValue={searchParams.get('maxPrice') || ''}
