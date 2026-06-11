@@ -34,6 +34,21 @@
   gap: 2rem;
 }
 
+.seller-details {
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.seller-name {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
   .sellers-page {

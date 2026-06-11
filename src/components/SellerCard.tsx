@@ -22,7 +22,7 @@ export default function SellerCard({ seller }: SellerCardProps) {
         className="card-image"
       />
       <div className="seller-details">
-        <h3 className="seller-name">{seller.name}</h3>
+        <h2 className="seller-name">{seller.name}</h2>
       </div>
     </Link>
   );

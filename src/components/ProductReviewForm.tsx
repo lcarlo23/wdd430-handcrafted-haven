@@ -93,6 +93,7 @@ export default function ProductReviewForm() {
           Message <span aria-label="required">*</span>
         </label>
         <textarea
+          id="comment"
           name="comment"
           value={formData.comment}
           onChange={handleChange}

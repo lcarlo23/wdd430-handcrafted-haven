@@ -13,6 +13,26 @@ import ProductReviewsTable from '@/components/ProductReviewsTable';
 import Link from 'next/link';
 import './product.css';
 
+export async function generateMetadata(props: { params: Promise<{ productId: string }> }) {
+  const params = await props.params;
+  const productId = params.productId;
+
+  try {
+    const product = await fetchProduct(productId);
+
+    if (!product) {
+      return { title: 'Product Not Found' };
+    }
+
+    return {
+      title: product.title,
+      description: product.description || `Buy ${product.title} handcrafted just for you.`,
+    };
+  } catch (error) {
+    return { title: 'Product Detail' };
+  }
+}
+
 export default async function ProductPage(props: { params: Promise<{ productId: string }> }) {
   const params = await props.params;
   const id = params.productId;
@@ -56,7 +76,7 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
       <div className="product-page">
         <h1>{product.title}</h1>
         <Image
-          src={product.imageUrl ? product.imageUrl : '/placeholder.jpg'}
+          src={product.image_url ? product.image_url : '/product-placeholder.jpg'}
           alt={altText}
           width={100}
           height={100}
@@ -66,8 +86,10 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
         <p className="product-description">{product.description}</p>
         <p className="product-isOrganic">{isOrganicText}</p>
         <p className="product-isRecycled">{isRecycledText}</p>
-        <StarRating rating={averageRating} />
-        <span className="number-of-reviews">{numberofReviewsText}</span>
+        <div>
+          <StarRating rating={averageRating} />
+          <span className="number-of-reviews">{numberofReviewsText}</span>
+        </div>
         <p className="product-seller-name">
           Sold by:
           <Link href={`/seller/${product.seller_id}`} className="product-page-seller-link">
@@ -75,7 +97,15 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
             {seller.name}
           </Link>
         </p>
-        <p className="product-purchase-text">{`E-mail seller to purchase this product: ${seller.email}.`}</p>
+        <div className="product-purchase-section">
+          <p className="product-purchase-question">Love this item? Want to make it yours?</p>
+          <a
+            href={`mailto:${seller.email}?subject=Interested in purchasing: ${product.title}`}
+            className="btn-buy-now"
+          >
+            ✉️ Email Seller to Buy
+          </a>
+        </div>
 
         <div className="product-reviews-section">
           <h2>Customer Reviews</h2>

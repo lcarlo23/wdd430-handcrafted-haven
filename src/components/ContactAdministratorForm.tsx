@@ -118,6 +118,7 @@ export default function ContactAdministratorForm() {
           Message <span aria-label="required">*</span>
         </label>
         <textarea
+          id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}

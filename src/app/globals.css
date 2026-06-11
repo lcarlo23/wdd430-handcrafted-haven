@@ -181,65 +181,6 @@ a:hover {
   font-family: var(--font-body);
 }
 
-/* --- Featured Handcrafter --- */
-.featured-section {
-  margin: 5rem auto;
-  max-width: 1200px;
-  background-color: rgba(221, 161, 94, 0.1);
-  padding: 3rem;
-  border-radius: 12px;
-}
-
-.handcrafter-card {
-  display: flex;
-  gap: 3rem;
-  align-items: center;
-}
-
-.handcrafter-image-box {
-  flex: 1;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.handcrafter-image-box img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  display: block;
-}
-
-.handcrafter-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.handcrafter-info h3 {
-  font-size: 1.8rem;
-  color: var(--color-moss);
-  margin: 0;
-  font-family: var(--font-heading);
-}
-
-.handcrafter-info p {
-  color: #4a4a4a;
-  line-height: 1.8;
-  font-size: 1.05rem;
-}
-
-@media (max-width: 768px) {
-  .handcrafter-card {
-    flex-direction: column;
-  }
-  .featured-section {
-    padding: 2rem 1rem;
-    margin: 2rem 1rem;
-  }
-}
-
 /* =========================================
    CATALOG & FILTERS (ProductGrid & ProductFilters)
    ========================================= */
@@ -393,6 +334,7 @@ a:hover {
   padding: 0.75rem 2.5rem;
   font-size: 1.1rem;
   font-family: var(--font-body);
+  text-align: center;
   font-weight: bold;
   border-radius: 8px;
   cursor: pointer;
