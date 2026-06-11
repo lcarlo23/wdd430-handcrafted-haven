@@ -4,7 +4,7 @@ import NavLinks from '@/components/navlinks';
 
 export default function NavBar() {
   return (
-    <div className="navbar">
+    <header className="navbar">
       <Link className="navbar-home-link" href="/">
         <div className="navbar-logo">
           <Image src="/logo.png" alt="Handcrafted Haven logo" width={200} height={67} />
@@ -13,6 +13,6 @@ export default function NavBar() {
       <nav className="nav-links">
         <NavLinks />
       </nav>
-    </div>
+    </header>
   );
 }

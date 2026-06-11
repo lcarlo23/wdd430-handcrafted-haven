@@ -9,7 +9,7 @@ export default function AccountPage() {
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
 
   return (
-    <div className="auth-page-container">
+    <main className="auth-page-container">
       <div className="auth-toggle-buttons">
         <button
           className={`toggle-btn ${authMode === 'login' ? 'active' : ''}`}
@@ -28,6 +28,6 @@ export default function AccountPage() {
       <div className="auth-form-wrapper">
         {authMode === 'login' ? <LoginForm /> : <RegisterForm />}
       </div>
-    </div>
+    </main>
   );
 }
