@@ -51,7 +51,7 @@
   font-size: 2rem;
   font-weight: bold;
   color: var(--color-olive);
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 1.5rem;
 }
 
 .product-description {
@@ -59,7 +59,6 @@
   font-size: 1.1rem;
   color: #4a4a4a;
   line-height: 1.8;
-  margin-bottom: 1.5rem !important;
   border-bottom: 1px solid #eaeaea;
   padding-bottom: 1.5rem;
 }
@@ -74,7 +73,6 @@
   border-radius: 20px;
   display: inline-block;
   width: fit-content;
-  margin-bottom: 0.8rem !important;
   border: 1px solid #e2e8f0;
 }
 
@@ -82,15 +80,12 @@
   font-size: 0.9rem;
   color: #484848;
   margin-top: -0.5rem;
-  margin-bottom: 1.5rem !important;
   display: block;
 }
 
 .product-seller-name {
   font-size: 1.05rem;
   color: #555;
-  margin-top: 1rem !important;
-  padding-top: 1rem;
 }
 
 .product-page-seller-link {

@@ -86,8 +86,10 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
         <p className="product-description">{product.description}</p>
         <p className="product-isOrganic">{isOrganicText}</p>
         <p className="product-isRecycled">{isRecycledText}</p>
-        <StarRating rating={averageRating} />
-        <span className="number-of-reviews">{numberofReviewsText}</span>
+        <div>
+          <StarRating rating={averageRating} />
+          <span className="number-of-reviews">{numberofReviewsText}</span>
+        </div>
         <p className="product-seller-name">
           Sold by:
           <Link href={`/seller/${product.seller_id}`} className="product-page-seller-link">
