@@ -31,7 +31,7 @@
 .contact-administrator-form + p,
 p:has(span[aria-label='required']) {
   font-size: 0.9rem;
-  color: #777;
+  color: #e00000;
   text-align: left;
   margin-bottom: 1rem;
 }

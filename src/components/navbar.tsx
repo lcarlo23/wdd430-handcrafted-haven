@@ -10,9 +10,9 @@ export default function NavBar() {
           <Image src="/logo.png" alt="Handcrafted Haven logo" width={200} height={67} />
         </div>
       </Link>
-      <div className="nav-links">
+      <nav className="nav-links">
         <NavLinks />
-      </div>
+      </nav>
     </div>
   );
 }
