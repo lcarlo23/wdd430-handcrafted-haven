@@ -106,6 +106,47 @@
 }
 
 /* =========================================
+   PURCHASE SECTION
+   ========================================= */
+
+.product-purchase-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: var(--color-cream);
+}
+
+.product-purchase-question {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #4a4a4a;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.btn-buy-now {
+  display: inline-block;
+  background-color: var(--color-moss);
+  color: var(--color-cream);
+  text-decoration: none;
+  padding: 0.8rem 1.8rem;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-weight: bold;
+  font-size: 1rem;
+  width: fit-content;
+  transition: background-color 0.3s ease;
+}
+
+.btn-buy-now:hover {
+  background-color: var(--color-olive);
+  color: var(--color-cream);
+}
+
+/* =========================================
    PRODUCT REVIEWS
    ========================================= */
 

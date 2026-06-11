@@ -76,7 +76,7 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
       <div className="product-page">
         <h1>{product.title}</h1>
         <Image
-          src={product.image_url ? product.image_url : '/placeholder.jpg'}
+          src={product.image_url ? product.image_url : '/product-placeholder.jpg'}
           alt={altText}
           width={100}
           height={100}
@@ -95,7 +95,15 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
             {seller.name}
           </Link>
         </p>
-        <p className="product-purchase-text">{`E-mail seller to purchase this product: ${seller.email}.`}</p>
+        <div className="product-purchase-section">
+          <p className="product-purchase-question">Love this item? Want to make it yours?</p>
+          <a
+            href={`mailto:${seller.email}?subject=Interested in purchasing: ${product.title}`}
+            className="btn-buy-now"
+          >
+            ✉️ Email Seller to Buy
+          </a>
+        </div>
 
         <div className="product-reviews-section">
           <h2>Customer Reviews</h2>
