@@ -13,6 +13,26 @@ import ProductReviewsTable from '@/components/ProductReviewsTable';
 import Link from 'next/link';
 import './product.css';
 
+export async function generateMetadata(props: { params: Promise<{ productId: string }> }) {
+  const params = await props.params;
+  const productId = params.productId;
+
+  try {
+    const product = await fetchProduct(productId);
+
+    if (!product) {
+      return { title: 'Product Not Found' };
+    }
+
+    return {
+      title: product.title,
+      description: product.description || `Buy ${product.title} handcrafted just for you.`,
+    };
+  } catch (error) {
+    return { title: 'Product Detail' };
+  }
+}
+
 export default async function ProductPage(props: { params: Promise<{ productId: string }> }) {
   const params = await props.params;
   const id = params.productId;

@@ -1,5 +1,11 @@
+import { Metadata } from 'next';
 import ContactAdministratorForm from '@/components/ContactAdministratorForm';
 import './contact.css';
+
+export const metadata: Metadata = {
+  title: 'Contact',
+  description: 'Contact us for any information',
+};
 
 export default function ContactPage() {
   return (

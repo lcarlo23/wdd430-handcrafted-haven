@@ -21,6 +21,32 @@ interface Product {
   is_recycled: boolean;
 }
 
+export async function generateMetadata(props: { params: Promise<{ sellerId: string }> }) {
+  const params = await props.params;
+  const sellerId = params.sellerId;
+
+  try {
+    const sellers = await sql<{ name: string }[]>`
+      SELECT name 
+      FROM sellers 
+      WHERE id = ${sellerId}::uuid
+    `;
+
+    const seller = sellers[0];
+
+    if (!seller) {
+      return { title: 'Seller Not Found' };
+    }
+
+    return {
+      title: seller.name,
+      description: `Discover handcrafted products by ${seller.name}.`,
+    };
+  } catch (error) {
+    return { title: 'Seller Profile' };
+  }
+}
+
 export default async function SellerPage(props: { params: Promise<{ sellerId: string }> }) {
   const params = await props.params;
   const sellerId = params.sellerId;

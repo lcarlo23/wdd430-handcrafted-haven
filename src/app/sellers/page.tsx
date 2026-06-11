@@ -1,5 +1,11 @@
+import { Metadata } from 'next';
 import SellersList from '@/components/SellersList';
 import './sellers.css';
+
+export const metadata: Metadata = {
+  title: 'Sellers',
+  description: 'Discover all the artisans',
+};
 
 export default function SellersPage() {
   return (
