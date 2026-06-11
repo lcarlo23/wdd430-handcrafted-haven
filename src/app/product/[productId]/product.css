@@ -80,7 +80,7 @@
 
 .number-of-reviews {
   font-size: 0.9rem;
-  color: #777;
+  color: #484848;
   margin-top: -0.5rem;
   margin-bottom: 1.5rem !important;
   display: block;
@@ -94,7 +94,7 @@
 }
 
 .product-page-seller-link {
-  color: var(--color-copper);
+  color: var(--color-olive);
   font-weight: bold;
   text-decoration: none;
   transition: all 0.3s ease;
