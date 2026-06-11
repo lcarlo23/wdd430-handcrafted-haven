@@ -76,7 +76,7 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
       <div className="product-page">
         <h1>{product.title}</h1>
         <Image
-          src={product.imageUrl ? product.imageUrl : '/placeholder.jpg'}
+          src={product.image_url ? product.image_url : '/placeholder.jpg'}
           alt={altText}
           width={100}
           height={100}

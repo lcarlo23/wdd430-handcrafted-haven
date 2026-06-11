@@ -16,7 +16,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link href={`/product/${product.id}`} className="product-card">
       <Image
-        src={product.image_url}
+        src={product.image_url ? product.image_url : '/product-placeholder.jpg'}
         alt={`${product.title} photo`}
         width={200}
         height={200}

@@ -1,12 +1,12 @@
 export type Product = {
   id: string;
   seller_id: string;
-  categoryId: string;
+  category_id: string;
   title: string;
   description: string;
   price: number;
-  stockQuantity: number;
-  imageUrl: string;
+  stock_quantity: number;
+  image_url: string;
   is_organic: boolean;
   is_recycled: boolean;
 };
