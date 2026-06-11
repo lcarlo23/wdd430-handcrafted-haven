@@ -184,6 +184,7 @@ a:hover {
 /* --- Featured Handcrafter --- */
 .featured-section {
   margin: 5rem auto;
+  width: 100%;
   max-width: 1200px;
   background-color: rgba(221, 161, 94, 0.1);
   padding: 3rem;

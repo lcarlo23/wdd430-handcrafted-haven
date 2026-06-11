@@ -27,7 +27,7 @@ export default async function Home({
           sectionTitle="Top Deals"
           gridClass="product-grid"
         />
-        <FeaturedHandcrafter sellerId="33333333-3333-3333-3333-333333333333" />
+        <FeaturedHandcrafter />
         <ProductGrid
           categoryId={categoryId}
           isOrganic={isOrganic}
