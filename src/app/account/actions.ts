@@ -6,8 +6,7 @@ import { createHash } from 'crypto';
 import { put } from '@vercel/blob';
 
 export async function registerUser(formData: FormData) {
-  const firstName = formData.get('firstName') as string;
-  const lastName = formData.get('lastName') as string;
+  const name = formData.get('name') as string;
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
   const confirmPassword = formData.get('confirmPassword') as string;
@@ -37,7 +36,6 @@ export async function registerUser(formData: FormData) {
       return { success: false, error: 'An account with this email already exists.' };
     }
 
-    const fullName = `${firstName} ${lastName}`;
     const hashedPassword = createHash('sha256').update(password).digest('hex');
 
     let profileImageUrl = '/placeholder.jpg';
@@ -53,7 +51,7 @@ export async function registerUser(formData: FormData) {
     // insert the new record directly into the sellers table
     await sql`
       INSERT INTO sellers (name, email, password_hash, bio, profile_image)
-      VALUES (${fullName}, ${email}, ${hashedPassword}, ${bio || ''}, ${profileImageUrl})
+      VALUES (${name}, ${email}, ${hashedPassword}, ${bio || ''}, ${profileImageUrl})
     `;
 
     revalidatePath('/account');
