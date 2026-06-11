@@ -116,6 +116,19 @@
   margin-top: -0.8rem;
 }
 
+.required-fields-note {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0 0 0.5rem 0;
+  text-align: left;
+}
+
+.auth-form span[aria-label='required'] {
+  color: #d9534f;
+  margin-left: 3px;
+  font-weight: bold;
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 480px) {
   .auth-page-container {

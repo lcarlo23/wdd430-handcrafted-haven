@@ -11,16 +11,20 @@ export default function RegisterForm() {
     const password = formData.get('password') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
 
+    const clearPasswords = () => {
+      if (formRef.current) {
+        const passInput = formRef.current.querySelector('#reg-password') as HTMLInputElement;
+        const confirmPassInput = formRef.current.querySelector(
+          '#reg-confirmpassword'
+        ) as HTMLInputElement;
+        if (passInput) passInput.value = '';
+        if (confirmPassInput) confirmPassInput.value = '';
+      }
+    };
+
     if (password !== confirmPassword) {
       toast.error('Passwords do not match.');
-      return;
-    }
-
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    if (!passwordRegex.test(password)) {
-      toast.error(
-        'Password must be at least 8 characters long and contain both letters and numbers.'
-      );
+      clearPasswords();
       return;
     }
 
@@ -28,6 +32,7 @@ export default function RegisterForm() {
 
     if (!result?.success) {
       toast.error(result?.error || 'An unknown error occurred.');
+      clearPasswords();
     } else {
       toast.success('Account created successfully!');
       formRef.current?.reset();
@@ -39,14 +44,27 @@ export default function RegisterForm() {
       <div className="register-form-container">
         <h2 className="auth-heading">Create Account</h2>
 
-        <form action={clientAction} ref={formRef} className="auth-form">
+        <form
+          ref={formRef}
+          className="auth-form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            clientAction(new FormData(e.currentTarget));
+          }}
+        >
+          <p className="required-fields-note">Fields marked with an asterisk are required</p>
+
           <div className="form-group">
-            <label htmlFor="reg-name">Full Name / Business Name</label>
+            <label htmlFor="reg-name">
+              Full Name / Business Name <span aria-label="required">*</span>
+            </label>
             <input id="reg-name" name="name" type="text" className="auth-input" required />
           </div>
 
           <div className="form-group">
-            <label htmlFor="reg-email">Email Address</label>
+            <label htmlFor="reg-email">
+              Email Address <span aria-label="required">*</span>
+            </label>
             <input id="reg-email" name="email" type="email" className="auth-input" required />
           </div>
 
@@ -67,18 +85,25 @@ export default function RegisterForm() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="reg-password">Password</label>
+            <label htmlFor="reg-password">
+              Password <span aria-label="required">*</span>
+            </label>
             <input
               id="reg-password"
               name="password"
               type="password"
               className="auth-input"
               required
+              minLength={8}
+              pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}"
+              title="Password must be at least 8 characters long and contain both letters and numbers."
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="reg-confirmpassword">Confirm Password</label>
+            <label htmlFor="reg-confirmpassword">
+              Confirm Password <span aria-label="required">*</span>
+            </label>
             <input
               id="reg-confirmpassword"
               name="confirmPassword"
@@ -93,7 +118,6 @@ export default function RegisterForm() {
           </button>
         </form>
       </div>
-
       <ToastContainer position="top-center" autoClose={4000} />
     </>
   );
