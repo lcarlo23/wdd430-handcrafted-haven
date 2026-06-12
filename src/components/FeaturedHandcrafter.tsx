@@ -9,7 +9,7 @@ export default async function FeaturedHandcrafter() {
     const result = await sql`
       SELECT id, name, bio, profile_image 
       FROM sellers 
-      ORDER BY RANDOM()
+      ORDER BY md5(id::text || CURRENT_DATE::text)
       LIMIT 1
     `;
 
