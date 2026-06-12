@@ -2,9 +2,15 @@ import sql from '@/lib/db';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import Image from 'next/image';
+import { Metadata } from 'next';
 import DashboardClientForm from './dashboardClientForm';
 
 import './dashboard.css';
+
+export const metadata: Metadata = {
+  title: 'Dashboard',
+  description: 'Manage your profile and products.',
+};
 
 interface Product {
   id: number;
@@ -61,7 +67,7 @@ export default async function SellerDashboard() {
   const categories = await sql<Category[]>`SELECT id, name FROM categories ORDER BY name ASC`;
 
   return (
-    <div className="dashboard-container">
+    <main className="dashboard-container">
       <h1 className="dashboard-title">Seller Dashboard</h1>
 
       <div className="dashboard-section">
@@ -96,6 +102,6 @@ export default async function SellerDashboard() {
       )}
 
       <DashboardClientForm seller={seller} products={products} categories={categories} />
-    </div>
+    </main>
   );
 }
