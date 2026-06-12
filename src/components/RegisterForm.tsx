@@ -1,31 +1,43 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { registerUser } from '@/app/account/actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { compressImageToLimit } from '@/lib/compressor';
 
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" className="auth-submit-btn" disabled={pending}>
+      {pending ? 'Creating Account...' : 'Register Account'}
+    </button>
+  );
+}
+
+const initialState = { success: false, error: '' };
+
 export default function RegisterForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction] = useActionState(registerUser, initialState);
 
-  const clientAction = async (formData: FormData) => {
+  useEffect(() => {
+    if (state?.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
+  const handleClientAction = async (formData: FormData) => {
     const password = formData.get('password') as string;
     const confirmPassword = formData.get('confirmPassword') as string;
 
-    const clearPasswords = () => {
-      if (formRef.current) {
-        const passInput = formRef.current.querySelector('#reg-password') as HTMLInputElement;
-        const confirmPassInput = formRef.current.querySelector(
-          '#reg-confirmpassword'
-        ) as HTMLInputElement;
-        if (passInput) passInput.value = '';
-        if (confirmPassInput) confirmPassInput.value = '';
-      }
-    };
-
     if (password !== confirmPassword) {
       toast.error('Passwords do not match.');
-      clearPasswords();
+      if (formRef.current) {
+        (formRef.current.querySelector('#reg-password') as HTMLInputElement).value = '';
+        (formRef.current.querySelector('#reg-confirmpassword') as HTMLInputElement).value = '';
+      }
       return;
     }
 
@@ -39,32 +51,15 @@ export default function RegisterForm() {
       }
     }
 
-    const result = await registerUser(null, formData);
-
-    if (!result?.success) {
-      toast.error(result?.error || 'An unknown error occurred.');
-      clearPasswords();
-    } else {
-      toast.success('Account created successfully!');
-      formRef.current?.reset();
-    }
+    formAction(formData);
   };
 
   return (
     <>
       <div className="register-form-container">
-        <h2 className="auth-heading">Create Account</h2>
+        <h2 className="auth-heading">Create an Account</h2>
 
-        <form
-          ref={formRef}
-          className="auth-form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            clientAction(new FormData(e.currentTarget));
-          }}
-        >
-          <p className="required-fields-note">Fields marked with an asterisk are required</p>
-
+        <form ref={formRef} action={handleClientAction} className="auth-form">
           <div className="form-group">
             <label htmlFor="reg-name">
               Full Name / Business Name <span aria-label="required">*</span>
@@ -80,8 +75,8 @@ export default function RegisterForm() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="reg-bio">Short Bio</label>
-            <textarea id="reg-bio" name="bio" className="auth-input" rows={3} />
+            <label htmlFor="reg-bio">Short Bio / Description</label>
+            <textarea id="reg-bio" name="bio" className="auth-input" rows={3}></textarea>
           </div>
 
           <div className="form-group">
@@ -124,9 +119,7 @@ export default function RegisterForm() {
             />
           </div>
 
-          <button type="submit" className="auth-submit-btn">
-            Register Account
-          </button>
+          <SubmitButton />
         </form>
       </div>
       <ToastContainer position="top-center" autoClose={4000} />
