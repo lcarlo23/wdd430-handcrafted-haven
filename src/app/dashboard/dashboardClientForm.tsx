@@ -84,9 +84,13 @@ export default function DashboardClientForm({ seller, products, categories }: Cl
     <>
       <section className="dashboard-section profile-section">
         <h2>Modify Profile Details</h2>
-        
-        {profileState.error && <p style={{ color: 'red', margin: '10px 0' }}>{profileState.error}</p>}
-        {profileState.success && <p style={{ color: 'green', margin: '10px 0' }}>{profileState.message}</p>}
+
+        {profileState.error && (
+          <p style={{ color: 'red', margin: '10px 0' }}>{profileState.error}</p>
+        )}
+        {profileState.success && (
+          <p style={{ color: 'green', margin: '10px 0' }}>{profileState.message}</p>
+        )}
 
         <form onSubmit={handleProfileSubmit} className="dashboard-form">
           <input type="hidden" name="current_profile_image" value={seller.profile_image || ''} />
@@ -100,11 +104,7 @@ export default function DashboardClientForm({ seller, products, categories }: Cl
           </div>
           <div className="form-group">
             <label>Upload Profile Image</label>
-            <input
-              type="file"
-              name="profile_image_file"
-              accept="image/*"
-            />
+            <input type="file" name="profile_image_file" accept="image/*" />
           </div>
           <button type="submit" className="btn-primary">
             Save Profile Changes
@@ -168,13 +168,7 @@ export default function DashboardClientForm({ seller, products, categories }: Cl
         <h2>Active Listings Management</h2>
         <div className="listings-grid">
           {products.map((product) => {
-            return (
-              <ProductListingRow 
-                key={product.id} 
-                product={product} 
-                categories={categories} 
-              />
-            );
+            return <ProductListingRow key={product.id} product={product} categories={categories} />;
           })}
         </div>
       </section>
@@ -214,11 +208,22 @@ function ProductListingRow({ product, categories }: { product: Product; categori
   };
 
   return (
-    <div className="listing-card" style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '6px', background: '#fff', marginBottom: '15px' }}>
+    <div
+      className="listing-card"
+      style={{
+        border: '1px solid #ddd',
+        padding: '15px',
+        borderRadius: '6px',
+        background: '#fff',
+        marginBottom: '15px',
+      }}
+    >
       {state.error && <p style={{ color: 'red', margin: '10px 0' }}>{state.error}</p>}
       {state.success && <p style={{ color: 'green', margin: '10px 0' }}>{state.message}</p>}
       {deleteState.error && <p style={{ color: 'red', margin: '10px 0' }}>{deleteState.error}</p>}
-      {deleteState.success && <p style={{ color: 'green', margin: '10px 0' }}>{deleteState.message}</p>}
+      {deleteState.success && (
+        <p style={{ color: 'green', margin: '10px 0' }}>{deleteState.message}</p>
+      )}
 
       <form onSubmit={handleUpdateSubmit} className="dashboard-form">
         <input type="hidden" name="id" value={product.id} />
@@ -244,13 +249,7 @@ function ProductListingRow({ product, categories }: { product: Product; categori
         </div>
         <div className="form-group">
           <label>Price</label>
-          <input
-            type="number"
-            name="price"
-            step="0.01"
-            defaultValue={product.price}
-            required
-          />
+          <input type="number" name="price" step="0.01" defaultValue={product.price} required />
         </div>
         <div className="form-group">
           <label>Stock</label>
@@ -292,9 +291,17 @@ function ProductListingRow({ product, categories }: { product: Product; categori
 
       <form onSubmit={handleDeleteSubmit} style={{ marginTop: '10px' }}>
         <input type="hidden" name="listingId" value={product.id} />
-        <button 
-          type="submit" 
-          style={{ background: '#dc3545', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', width: '100%' }}
+        <button
+          type="submit"
+          style={{
+            background: '#dc3545',
+            color: '#fff',
+            border: 'none',
+            padding: '8px 16px',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            width: '100%',
+          }}
         >
           Delete Listing Permanently
         </button>

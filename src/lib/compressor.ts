@@ -1,4 +1,7 @@
-export async function compressImageToLimit(file: File, maxSizeBytes: number = 1048576): Promise<File> {
+export async function compressImageToLimit(
+  file: File,
+  maxSizeBytes: number = 1048576
+): Promise<File> {
   // if the file is already under the target file limit, return it unmodified
   if (file.size <= maxSizeBytes) {
     return file;
@@ -37,7 +40,7 @@ export async function compressImageToLimit(file: File, maxSizeBytes: number = 10
         ctx.drawImage(img, 0, 0, width, height);
 
         // iteratively reduce the image quality until the resulting file size is under the target limit or a minimum quality threshold is reached
-        let quality = 0.90;
+        let quality = 0.9;
         const stepDown = () => {
           canvas.toBlob(
             (blob) => {

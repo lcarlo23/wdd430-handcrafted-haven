@@ -47,11 +47,15 @@ export async function updateSellerProfile(prevState: any, formData: FormData) {
 export async function addProduct(prevState: any, formData: FormData) {
   const title = formData.get('title') as string;
   const description = formData.get('description') as string;
-  
+
   const rawPrice = formData.get('price') as string;
   const price = parseFloat(rawPrice);
   if (isNaN(price) || price < 0 || price >= 100000000) {
-    return { success: false, message: null, error: 'Please enter a valid product price less than 100,000,000.' };
+    return {
+      success: false,
+      message: null,
+      error: 'Please enter a valid product price less than 100,000,000.',
+    };
   }
 
   const rawStock = formData.get('stock_quantity') as string;
@@ -94,11 +98,15 @@ export async function updateProductListing(prevState: any, formData: FormData) {
   const id = parseInt(formData.get('id') as string, 10);
   const title = formData.get('title') as string;
   const description = formData.get('description') as string;
-  
+
   const rawPrice = formData.get('price') as string;
   const price = parseFloat(rawPrice);
   if (isNaN(price) || price < 0 || price >= 100000000) {
-    return { success: false, message: null, error: 'Please enter a valid product price less than 100,000,000.' };
+    return {
+      success: false,
+      message: null,
+      error: 'Please enter a valid product price less than 100,000,000.',
+    };
   }
 
   const rawStock = formData.get('stock_quantity') as string;
