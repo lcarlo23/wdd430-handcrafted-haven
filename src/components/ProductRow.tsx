@@ -9,21 +9,22 @@ interface Product {
 }
 
 interface ProductRowProps {
-  rowId: string; // category_id to fetch products for this row
-  sectionTitle: string; // Title to display above the product grid
-  gridClass: string; // CSS class to control grid layout
+  rowId: string;
+  sectionTitle: string;
+  gridClass: string;
 }
 
 export default async function ProductRow({ rowId, sectionTitle, gridClass }: ProductRowProps) {
   let products: Product[] = [];
 
   try {
-    // Uses the global, optimized connection pool found in lib/db.ts to fetch products for the given category_id (rowId)
     products = await sql<Product[]>`
-      SELECT id, title, price 
-      FROM products 
-      WHERE category_id = ${rowId}
-      ORDER BY id ASC
+      SELECT p.id, p.title, p.price, p.image_url
+      FROM products p
+      LEFT JOIN reviews r ON p.id = r.product_id
+      GROUP BY p.id, p.title, p.price, p.image_url
+      ORDER BY AVG(r.rating) DESC NULLS LAST
+      LIMIT 4
     `;
   } catch (error) {
     console.error(`Database query failure for row allocation [${rowId}]:`, error);
