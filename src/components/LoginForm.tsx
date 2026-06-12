@@ -20,7 +20,7 @@ export default function LoginForm() {
     formData.append('password', password);
 
     // dispatch the login action to the server and await the result
-    const result = await loginUser(formData);
+    const result = await loginUser(null, formData);
 
     if (!result.success) {
       setError(result.error || 'An unknown error occurred.');

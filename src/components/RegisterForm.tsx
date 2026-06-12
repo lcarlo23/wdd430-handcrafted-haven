@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { registerUser } from '@/app/account/actions';
 import { ToastContainer, toast } from 'react-toastify';
+import { compressImageToLimit } from '@/lib/compressor';
 
 export default function RegisterForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -28,7 +29,17 @@ export default function RegisterForm() {
       return;
     }
 
-    const result = await registerUser(formData);
+    const imageFile = formData.get('profileImage') as File;
+    if (imageFile && imageFile.size > 0) {
+      try {
+        const optimizedFile = await compressImageToLimit(imageFile, 1048576);
+        formData.set('profileImage', optimizedFile);
+      } catch (err) {
+        console.error('Client compression operation aborted:', err);
+      }
+    }
+
+    const result = await registerUser(null, formData);
 
     if (!result?.success) {
       toast.error(result?.error || 'An unknown error occurred.');
