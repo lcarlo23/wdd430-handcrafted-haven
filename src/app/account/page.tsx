@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import sql from '@/lib/db';
 import Link from 'next/link';
+import Image from 'next/image';
 import AccountPageClient from './accountPageClient';
 import './account.css';
 
@@ -47,16 +48,12 @@ export default async function AccountPage() {
           }}
         >
           {seller.profile_image ? (
-            <img
+            <Image
               src={seller.profile_image}
               alt={`${seller.name}'s avatar`}
-              style={{
-                width: '120px',
-                height: '120px',
-                borderRadius: '50%',
-                objectFit: 'cover',
-                marginBottom: '15px',
-              }}
+              width={120}
+              height={120}
+              loading="eager"
             />
           ) : (
             <div

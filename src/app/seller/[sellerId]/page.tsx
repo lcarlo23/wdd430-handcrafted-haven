@@ -43,7 +43,7 @@ export async function generateMetadata(props: { params: Promise<{ sellerId: stri
       description: `Discover handcrafted products by ${seller.name}.`,
     };
   } catch (error) {
-    return { title: 'Seller Profile' };
+    return { title: 'There was an error', description: { error } };
   }
 }
 

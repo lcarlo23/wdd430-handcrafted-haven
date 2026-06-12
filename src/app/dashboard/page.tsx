@@ -1,9 +1,7 @@
 import sql from '@/lib/db';
-
 import { cookies } from 'next/headers';
-
 import { redirect } from 'next/navigation';
-
+import Image from 'next/image';
 import DashboardClientForm from './dashboardClientForm';
 
 import './dashboard.css';
@@ -77,10 +75,12 @@ export default async function SellerDashboard() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginTop: '10px' }}>
           {seller.profile_image ? (
-            <img
+            <Image
               src={seller.profile_image}
-              alt="Profile"
-              style={{ width: '80px', height: '80px', borderRadius: '50%', objectFit: 'cover' }}
+              alt={`${seller.name}'s avatar`}
+              width={80}
+              height={80}
+              loading="eager"
             />
           ) : (
             <div
@@ -122,8 +122,8 @@ export default async function SellerDashboard() {
             color: '#8a6d3b',
           }}
         >
-          <strong>Notice:</strong> Hey, you have no active listings yet! Fill out the "Add New
-          Product" form below to publish your first craft item.
+          <strong>Notice:</strong>
+          {`Hey, you have no active listings yet! Fill out the "Add New Product" form below to publish your first craft item.`}
         </div>
       )}
 

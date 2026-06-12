@@ -29,7 +29,7 @@ export async function generateMetadata(props: { params: Promise<{ productId: str
       description: product.description || `Buy ${product.title} handcrafted just for you.`,
     };
   } catch (error) {
-    return { title: 'Product Detail' };
+    return { title: 'There was an error', description: { error } };
   }
 }
 
