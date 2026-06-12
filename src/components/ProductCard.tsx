@@ -13,6 +13,11 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(Number(product.price));
+
   return (
     <Link href={`/product/${product.id}`} className="product-card">
       <Image
@@ -24,7 +29,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       />
       <div className="product-details">
         <h3 className="product-name">{product.title}</h3>
-        <p className="product-price">$ {product.price}</p>
+        <p className="product-price">{formattedPrice}</p>
       </div>
     </Link>
   );

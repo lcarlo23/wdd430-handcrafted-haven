@@ -45,7 +45,10 @@ export default async function ProductPage(props: { params: Promise<{ productId: 
   const sellerId = product.seller_id;
   const [seller] = await Promise.all([fetchSellerbySellerId(sellerId)]);
   const altText = `Image of ${product.title} product`;
-  const priceText = `$${product.price}`;
+  const priceText = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(Number(product.price));
   let numberofReviewsText = '';
   if (numberofReviews === 1) {
     numberofReviewsText = `(${numberofReviews} review)`;
