@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, startTransition } from 'react';
-import { updateSellerProfile, addProduct, updateProductListing } from './actions';
+import { updateSellerProfile, addProduct, updateProductListing, deleteListing } from './actions';
 import { compressImageToLimit } from '@/lib/compressor';
 
 interface Product {
@@ -184,6 +184,7 @@ export default function DashboardClientForm({ seller, products, categories }: Cl
 
 function ProductListingRow({ product, categories }: { product: Product; categories: Category[] }) {
   const [state, action] = useActionState(updateProductListing, initialState);
+  const [deleteState, deleteAction] = useActionState(deleteListing, initialState);
 
   const handleUpdateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -202,10 +203,22 @@ function ProductListingRow({ product, categories }: { product: Product; categori
     });
   };
 
+  const handleDeleteSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (confirm('Are you sure you want to delete this listing permanently?')) {
+      const formData = new FormData(e.currentTarget);
+      startTransition(() => {
+        deleteAction(formData);
+      });
+    }
+  };
+
   return (
-    <div className="listing-card">
+    <div className="listing-card" style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '6px', background: '#fff', marginBottom: '15px' }}>
       {state.error && <p style={{ color: 'red', margin: '10px 0' }}>{state.error}</p>}
       {state.success && <p style={{ color: 'green', margin: '10px 0' }}>{state.message}</p>}
+      {deleteState.error && <p style={{ color: 'red', margin: '10px 0' }}>{deleteState.error}</p>}
+      {deleteState.success && <p style={{ color: 'green', margin: '10px 0' }}>{deleteState.message}</p>}
 
       <form onSubmit={handleUpdateSubmit} className="dashboard-form">
         <input type="hidden" name="id" value={product.id} />
@@ -272,8 +285,18 @@ function ProductListingRow({ product, categories }: { product: Product; categori
             Recycled
           </label>
         </div>
-        <button type="submit" className="btn-secondary">
+        <button type="submit" className="btn-secondary" style={{ marginRight: '10px' }}>
           Update Listing
+        </button>
+      </form>
+
+      <form onSubmit={handleDeleteSubmit} style={{ marginTop: '10px' }}>
+        <input type="hidden" name="listingId" value={product.id} />
+        <button 
+          type="submit" 
+          style={{ background: '#dc3545', color: '#fff', border: 'none', padding: '8px 16px', borderRadius: '4px', cursor: 'pointer', width: '100%' }}
+        >
+          Delete Listing Permanently
         </button>
       </form>
     </div>

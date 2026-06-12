@@ -138,3 +138,25 @@ export async function updateProductListing(prevState: any, formData: FormData) {
     return { success: false, message: null, error: 'Product modification execution failed.' };
   }
 }
+
+export async function deleteListing(prevState: any, formData: FormData) {
+  const listingId = parseInt(formData.get('listingId') as string, 10);
+  if (isNaN(listingId)) {
+    return { success: false, message: null, error: 'Invalid product tracking token identifier.' };
+  }
+
+  try {
+    const sellerId = await getAuthenticatedSellerId();
+
+    await sql`
+      DELETE FROM products 
+      WHERE id = ${listingId} AND seller_id = ${sellerId}
+    `;
+
+    revalidatePath('/dashboard');
+    return { success: true, message: 'Product listing successfully destroyed.', error: null };
+  } catch (error: any) {
+    console.error('Failed to remove product item:', error);
+    return { success: false, message: null, error: 'Product deletion execution failed.' };
+  }
+}
