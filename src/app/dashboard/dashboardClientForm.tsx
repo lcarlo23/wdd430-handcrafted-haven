@@ -1,8 +1,10 @@
 'use client';
 
-import { useActionState, startTransition } from 'react';
+import { useActionState, useRef, useEffect, startTransition } from 'react';
+import { useFormStatus } from 'react-dom';
 import { updateSellerProfile, addProduct, updateProductListing, deleteListing } from './actions';
 import { compressImageToLimit } from '@/lib/compressor';
+import { ToastContainer, toast } from 'react-toastify';
 
 interface Product {
   id: number;
@@ -34,123 +36,192 @@ interface ClientProps {
   categories: Category[];
 }
 
-interface ActionState {
-  success: boolean;
-  message: string | null;
-  error: string | null;
+function SubmitBtn({
+  text,
+  loadingText,
+  className = 'btn-primary',
+}: {
+  text: string;
+  loadingText: string;
+  className?: string;
+}) {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" className={className} disabled={pending}>
+      {pending ? loadingText : text}
+    </button>
+  );
 }
 
-const initialState: ActionState = { success: false, message: null, error: null };
+const initialState = {
+  success: false,
+  message: null as string | null,
+  error: null as string | null,
+};
 
 export default function DashboardClientForm({ seller, products, categories }: ClientProps) {
   const [profileState, profileAction] = useActionState(updateSellerProfile, initialState);
   const [addState, addAction] = useActionState(addProduct, initialState);
+  const [updateState, updateAction] = useActionState(updateProductListing, initialState);
+  const [deleteState, deleteAction] = useActionState(deleteListing, initialState);
 
-  const handleProfileSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+  const addFormRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (profileState?.message) toast.success(profileState.message);
+    if (profileState?.error) toast.error(profileState.error);
+
+    if (addState?.message) {
+      toast.success(addState.message);
+      addFormRef.current?.reset();
+    }
+    if (addState?.error) toast.error(addState.error);
+
+    if (updateState?.message) toast.success(updateState.message);
+    if (updateState?.error) toast.error(updateState.error);
+
+    if (deleteState?.message) toast.success(deleteState.message);
+    if (deleteState?.error) toast.error(deleteState.error);
+  }, [profileState, addState, updateState, deleteState]);
+
+  const handleProfileWrapper = async (formData: FormData) => {
     const file = formData.get('profile_image_file') as File;
     if (file && file.size > 0) {
-      try {
-        const compressed = await compressImageToLimit(file, 1048576);
-        formData.set('profile_image_file', compressed);
-      } catch (err) {
-        console.error(err);
-      }
+      const optimized = await compressImageToLimit(file, 1048576);
+      formData.set('profile_image_file', optimized);
     }
+
+    formData.append('current_profile_image', seller.profile_image || '');
+
     startTransition(() => {
       profileAction(formData);
     });
   };
 
-  const handleAddProductSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+  const handleAddWrapper = async (formData: FormData) => {
     const file = formData.get('product_image_file') as File;
     if (file && file.size > 0) {
-      try {
-        const compressed = await compressImageToLimit(file, 1048576);
-        formData.set('product_image_file', compressed);
-      } catch (err) {
-        console.error(err);
-      }
+      const optimized = await compressImageToLimit(file, 1048576);
+      formData.set('product_image_file', optimized);
     }
+
     startTransition(() => {
       addAction(formData);
     });
   };
 
+  const handleUpdateWrapper = async (formData: FormData) => {
+    const file = formData.get('product_image_file') as File;
+    if (file && file.size > 0) {
+      const optimized = await compressImageToLimit(file, 1048576);
+      formData.set('product_image_file', optimized);
+    }
+
+    startTransition(() => {
+      updateAction(formData);
+    });
+  };
+
   return (
     <>
-      <section className="dashboard-section profile-section">
-        <h2>Modify Profile Details</h2>
-
-        {profileState.error && (
-          <p style={{ color: 'red', margin: '10px 0' }}>{profileState.error}</p>
-        )}
-        {profileState.success && (
-          <p style={{ color: 'green', margin: '10px 0' }}>{profileState.message}</p>
-        )}
-
-        <form onSubmit={handleProfileSubmit} className="dashboard-form">
-          <input type="hidden" name="current_profile_image" value={seller.profile_image || ''} />
+      <div className="dashboard-section">
+        <h2>Update Profile</h2>
+        <form action={handleProfileWrapper} className="auth-form">
           <div className="form-group">
-            <label>Business Name</label>
-            <input type="text" name="name" defaultValue={seller.name} required />
+            <label htmlFor="name">Store Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              className="auth-input"
+              defaultValue={seller.name}
+              required
+            />
           </div>
           <div className="form-group">
-            <label>Biography</label>
-            <textarea name="bio" defaultValue={seller.bio || ''} required />
+            <label htmlFor="bio">Biography</label>
+            <textarea
+              id="bio"
+              name="bio"
+              className="auth-input"
+              rows={4}
+              defaultValue={seller.bio}
+            ></textarea>
           </div>
           <div className="form-group">
-            <label>Upload Profile Image</label>
-            <input type="file" name="profile_image_file" accept="image/*" />
+            <label htmlFor="profile_image">Profile Image (Optional)</label>
+            <input
+              type="file"
+              id="profile_image"
+              name="profile_image_file"
+              className="auth-input"
+              accept="image/*"
+            />
           </div>
-          <button type="submit" className="btn-primary">
-            Save Profile Changes
-          </button>
+          <SubmitBtn text="Save Profile" loadingText="Saving..." className="btn-primary" />
         </form>
-      </section>
+      </div>
 
-      <section className="dashboard-section add-product-section">
+      <div className="dashboard-section">
         <h2>Add New Product</h2>
-
-        {addState.error && <p style={{ color: 'red', margin: '10px 0' }}>{addState.error}</p>}
-        {addState.success && <p style={{ color: 'green', margin: '10px 0' }}>{addState.message}</p>}
-
-        <form onSubmit={handleAddProductSubmit} className="dashboard-form">
+        <form ref={addFormRef} action={handleAddWrapper} className="auth-form">
           <div className="form-group">
-            <label>Product Title</label>
-            <input type="text" name="title" required />
+            <label htmlFor="product_title">Title</label>
+            <input type="text" id="product_title" name="title" className="auth-input" required />
           </div>
           <div className="form-group">
-            <label>Category</label>
-            <select name="category_id" required>
-              <option value="">Select Category</option>
-              {categories.map((cat) => (
-                <option key={cat.id} value={cat.id}>
-                  {cat.name}
+            <label htmlFor="product_category">Category</label>
+            <select id="product_category" name="category_id" className="auth-input" required>
+              <option value="">Select a category</option>
+              {categories.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
                 </option>
               ))}
             </select>
           </div>
           <div className="form-group">
-            <label>Description</label>
-            <textarea name="description" required />
+            <label htmlFor="product_description">Description</label>
+            <textarea
+              id="product_description"
+              name="description"
+              className="auth-input"
+              rows={3}
+              required
+            ></textarea>
           </div>
           <div className="form-group">
-            <label>Price</label>
-            <input type="number" name="price" step="0.01" required />
+            <label htmlFor="product_price">Price ($)</label>
+            <input
+              type="number"
+              step="0.01"
+              id="product_price"
+              name="price"
+              className="auth-input"
+              required
+            />
           </div>
           <div className="form-group">
-            <label>Stock Quantity</label>
-            <input type="number" name="stock_quantity" required />
+            <label htmlFor="product_stock">Stock</label>
+            <input
+              type="number"
+              id="product_stock"
+              name="stock_quantity"
+              className="auth-input"
+              required
+            />
           </div>
           <div className="form-group">
-            <label>Upload Product Image</label>
-            <input type="file" name="product_image_file" accept="image/*" />
+            <label htmlFor="new_product_image">Product Image</label>
+            <input
+              type="file"
+              id="new_product_image"
+              name="product_image_file"
+              className="auth-input"
+              accept="image/*"
+            />
           </div>
-          <div className="form-checkbox-group">
+          <div className="form-group checkbox-group">
             <label>
               <input type="checkbox" name="is_organic" value="true" /> Organic
             </label>
@@ -158,154 +229,132 @@ export default function DashboardClientForm({ seller, products, categories }: Cl
               <input type="checkbox" name="is_recycled" value="true" /> Recycled
             </label>
           </div>
-          <button type="submit" className="btn-primary">
-            Publish Product
-          </button>
+          <SubmitBtn text="Publish Product" loadingText="Publishing..." className="btn-primary" />
         </form>
-      </section>
+      </div>
 
-      <section className="dashboard-section listings-section">
-        <h2>Active Listings Management</h2>
-        <div className="listings-grid">
-          {products.map((product) => {
-            return <ProductListingRow key={product.id} product={product} categories={categories} />;
-          })}
+      {products.length > 0 && (
+        <div className="dashboard-section">
+          <h2>Manage Your Listings</h2>
+          <div className="listings-grid">
+            {products.map((product) => (
+              <div key={product.id} className="listing-card">
+                <form action={handleUpdateWrapper} className="auth-form">
+                  <input type="hidden" name="id" value={product.id} />
+
+                  <div className="form-group">
+                    <label htmlFor="title">Title</label>
+                    <input
+                      type="text"
+                      id="title"
+                      name="title"
+                      className="auth-input"
+                      defaultValue={product.title}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="category">Category</label>
+                    <select
+                      id="category"
+                      name="category_id"
+                      className="auth-input"
+                      defaultValue={product.category_id || ''}
+                      required
+                    >
+                      {categories.map((c) => (
+                        <option key={c.id} value={c.id}>
+                          {c.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="description">Description</label>
+                    <textarea
+                      id="description"
+                      name="description"
+                      className="auth-input"
+                      rows={2}
+                      defaultValue={product.description}
+                      required
+                    ></textarea>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="price">Price ($)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      id="price"
+                      name="price"
+                      className="auth-input"
+                      defaultValue={product.price}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="stock">Stock</label>
+                    <input
+                      type="number"
+                      id="stock"
+                      name="stock_quantity"
+                      className="auth-input"
+                      defaultValue={product.stock_quantity}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="product_image">Change Image</label>
+                    <input
+                      type="file"
+                      id="product_image"
+                      name="product_image_file"
+                      className="auth-input"
+                      accept="image/*"
+                    />
+                  </div>
+                  <div className="form-group checkbox-group">
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="is_organic"
+                        value="true"
+                        defaultChecked={product.is_organic}
+                      />{' '}
+                      Organic
+                    </label>
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="is_recycled"
+                        value="true"
+                        defaultChecked={product.is_recycled}
+                      />{' '}
+                      Recycled
+                    </label>
+                  </div>
+                  <SubmitBtn
+                    text="Update Listing"
+                    loadingText="Updating..."
+                    className="btn-secondary"
+                  />
+                </form>
+
+                <form action={deleteAction} style={{ marginTop: '1rem' }}>
+                  <input type="hidden" name="listingId" value={product.id} />
+                  <SubmitBtn
+                    text="Delete Listing Permanently"
+                    loadingText="Deleting..."
+                    className="btn-danger"
+                  />
+                </form>
+              </div>
+            ))}
+          </div>
         </div>
-      </section>
-    </>
-  );
-}
-
-function ProductListingRow({ product, categories }: { product: Product; categories: Category[] }) {
-  const [state, action] = useActionState(updateProductListing, initialState);
-  const [deleteState, deleteAction] = useActionState(deleteListing, initialState);
-
-  const handleUpdateSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const file = formData.get('product_image_file') as File;
-    if (file && file.size > 0) {
-      try {
-        const compressed = await compressImageToLimit(file, 1048576);
-        formData.set('product_image_file', compressed);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    startTransition(() => {
-      action(formData);
-    });
-  };
-
-  const handleDeleteSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (confirm('Are you sure you want to delete this listing permanently?')) {
-      const formData = new FormData(e.currentTarget);
-      startTransition(() => {
-        deleteAction(formData);
-      });
-    }
-  };
-
-  return (
-    <div
-      className="listing-card"
-      style={{
-        border: '1px solid #ddd',
-        padding: '15px',
-        borderRadius: '6px',
-        background: '#fff',
-        marginBottom: '15px',
-      }}
-    >
-      {state.error && <p style={{ color: 'red', margin: '10px 0' }}>{state.error}</p>}
-      {state.success && <p style={{ color: 'green', margin: '10px 0' }}>{state.message}</p>}
-      {deleteState.error && <p style={{ color: 'red', margin: '10px 0' }}>{deleteState.error}</p>}
-      {deleteState.success && (
-        <p style={{ color: 'green', margin: '10px 0' }}>{deleteState.message}</p>
       )}
 
-      <form onSubmit={handleUpdateSubmit} className="dashboard-form">
-        <input type="hidden" name="id" value={product.id} />
-        <input type="hidden" name="current_image_url" value={product.image_url || ''} />
-
-        <div className="form-group">
-          <label>Title</label>
-          <input type="text" name="title" defaultValue={product.title} required />
-        </div>
-        <div className="form-group">
-          <label>Category</label>
-          <select name="category_id" defaultValue={product.category_id || ''} required>
-            {categories.map((cat) => (
-              <option key={cat.id} value={cat.id}>
-                {cat.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <textarea name="description" defaultValue={product.description || ''} required />
-        </div>
-        <div className="form-group">
-          <label>Price</label>
-          <input type="number" name="price" step="0.01" defaultValue={product.price} required />
-        </div>
-        <div className="form-group">
-          <label>Stock</label>
-          <input
-            type="number"
-            name="stock_quantity"
-            defaultValue={product.stock_quantity}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Change Product Image</label>
-          <input type="file" name="product_image_file" accept="image/*" />
-        </div>
-        <div className="form-checkbox-group">
-          <label>
-            <input
-              type="checkbox"
-              name="is_organic"
-              value="true"
-              defaultChecked={product.is_organic}
-            />{' '}
-            Organic
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              name="is_recycled"
-              value="true"
-              defaultChecked={product.is_recycled}
-            />{' '}
-            Recycled
-          </label>
-        </div>
-        <button type="submit" className="btn-secondary" style={{ marginRight: '10px' }}>
-          Update Listing
-        </button>
-      </form>
-
-      <form onSubmit={handleDeleteSubmit} style={{ marginTop: '10px' }}>
-        <input type="hidden" name="listingId" value={product.id} />
-        <button
-          type="submit"
-          style={{
-            background: '#dc3545',
-            color: '#fff',
-            border: 'none',
-            padding: '8px 16px',
-            borderRadius: '4px',
-            cursor: 'pointer',
-            width: '100%',
-          }}
-        >
-          Delete Listing Permanently
-        </button>
-      </form>
-    </div>
+      <ToastContainer position="top-center" autoClose={3000} />
+    </>
   );
 }

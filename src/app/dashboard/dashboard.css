@@ -57,6 +57,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .form-group label {
@@ -68,6 +69,7 @@
 
 .form-group input[type='text'],
 .form-group input[type='number'],
+.form-group input[type='file'],
 .form-group textarea,
 .form-group select {
   width: 100%;
@@ -187,6 +189,83 @@
 
 .listing-card .form-group textarea {
   min-height: 80px;
+}
+
+/* --- PROFILE CARD IN DASHBOARD --- */
+.dashboard-profile-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #eaeaea;
+}
+
+.dashboard-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-cream);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-avatar-fallback {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #e2e8f0;
+  color: #777;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.dashboard-profile-info strong {
+  font-size: 1.2rem;
+  color: var(--color-moss);
+}
+
+.dashboard-profile-info p {
+  margin: 0.5rem 0 0 0;
+  color: #555;
+}
+
+/* --- NOTICES AND ALERTS --- */
+.no-listings-notice {
+  padding: 1.5rem;
+  border: 2px dashed var(--color-gold);
+  background-color: rgba(221, 161, 94, 0.1);
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  color: #8a6d3b;
+}
+
+/* --- DANGER BUTTON --- */
+.btn-danger {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.btn-danger:disabled,
+.btn-primary:disabled,
+.btn-secondary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* --- RESPONSIVE DESIGN --- */
