@@ -78,11 +78,17 @@
 }
 
 @media (max-width: 768px) {
+  .home-main {
+    padding: 0;
+    width: auto;
+  }
+
   .handcrafter-card {
     flex-direction: column;
   }
   .featured-section {
     padding: 2rem 1rem;
     margin: 2rem 1rem;
+    border-radius: 0;
   }
 }

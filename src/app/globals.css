@@ -82,7 +82,6 @@ a:hover {
 
 .nav-link {
   color: var(--color-moss);
-  font-family: var(--font-body);
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.85rem;
@@ -178,7 +177,6 @@ a:hover {
   color: var(--color-copper);
   font-size: 1.2rem;
   margin: 0;
-  font-family: var(--font-body);
 }
 
 /* =========================================
@@ -214,7 +212,6 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-body);
   color: var(--color-moss);
   font-weight: 600;
 }
@@ -223,7 +220,6 @@ a:hover {
   padding: 0.5rem 1rem;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
-  font-family: var(--font-body);
   font-size: 0.95rem;
   color: var(--color-moss);
   background-color: #f8f9fa;
@@ -255,7 +251,6 @@ a:hover {
   padding: 0.5rem;
   border: 1px solid #e2e8f0;
   border-radius: 4px;
-  font-family: var(--font-body);
   font-size: 0.95rem;
   color: var(--color-moss);
   background-color: #f8f9fa;
@@ -280,7 +275,6 @@ a:hover {
   padding: 0.5rem 1.2rem;
   border-radius: 4px;
   cursor: pointer;
-  font-family: var(--font-body);
   font-weight: 600;
   transition: background-color 0.3s ease;
 }
@@ -296,7 +290,6 @@ a:hover {
   padding: 0.5rem 1.2rem;
   border-radius: 4px;
   cursor: pointer;
-  font-family: var(--font-body);
   font-weight: 600;
   transition: background-color 0.3s ease;
 }
@@ -333,7 +326,6 @@ a:hover {
   border: 2px solid var(--color-moss);
   padding: 0.75rem 2.5rem;
   font-size: 1.1rem;
-  font-family: var(--font-body);
   text-align: center;
   font-weight: bold;
   border-radius: 8px;
