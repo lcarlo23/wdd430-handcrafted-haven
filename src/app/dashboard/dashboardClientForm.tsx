@@ -241,6 +241,7 @@ export default function DashboardClientForm({ seller, products, categories }: Cl
               <div key={product.id} className="listing-card">
                 <form action={handleUpdateWrapper} className="auth-form">
                   <input type="hidden" name="id" value={product.id} />
+                  <input type="hidden" name="current_image_url" value={product.image_url || ''} />
 
                   <div className="form-group">
                     <label htmlFor="title">Title</label>
